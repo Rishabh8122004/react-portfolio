@@ -1,10 +1,9 @@
-import { Link } from 'react-router-dom'
-import '../css_files/Hero.css'
+import { Link } from "react-router-dom";
+import "../css_files/Hero.css";
 
 function Hero() {
   return (
     <section className="hero">
-
       <article className="hero-content">
         <p className="hero-greeting">Hello, I’m</p>
 
@@ -27,7 +26,7 @@ function Hero() {
           </Link>
 
           <a
-            href="/pdf_files/rishabh_resume.pdf"
+            href={`${import.meta.env.BASE_URL}pdf_files/rishabh_resume.pdf`}
             target="_blank"
             rel="noopener noreferrer"
             className="hero-button secondary"
@@ -39,13 +38,12 @@ function Hero() {
 
       <figure className="hero-image">
         <img
-          src="/image/profile.jpg"
+          src={`${import.meta.env.BASE_URL}image/profile.jpg`}
           alt="Portrait of Rishabh Pareek"
         />
       </figure>
-
     </section>
-  )
+  );
 }
 
-export default Hero
+export default Hero;
