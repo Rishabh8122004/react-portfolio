@@ -1,0 +1,102 @@
+/* ==================================================
+   THEME TOGGLE
+   MOBILE-FIRST
+================================================== */
+
+.theme-toggle {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 72px;
+  height: 34px;
+
+  padding: 4px 6px;
+
+  background-color: var(--bg-soft);
+  color: var(--text-muted);
+
+  border: 1px solid var(--border);
+  border-radius: 999px;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+/* ==================================================
+   THEME ICONS
+================================================== */
+
+.theme-icon {
+  position: relative;
+  z-index: 1;
+
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+/* ==================================================
+   TOGGLE KNOB
+================================================== */
+
+.theme-knob {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+
+  width: 24px;
+  height: 24px;
+
+  background-color: var(--bg-surface);
+
+  border-radius: 50%;
+
+  box-shadow: var(--shadow-sm);
+
+  transition:
+    transform 0.25s ease,
+    background-color 0.25s ease;
+}
+
+.theme-knob.dark {
+  transform: translateX(38px);
+}
+
+/* ==================================================
+   HOVER / FOCUS
+================================================== */
+
+.theme-toggle:hover {
+  border-color: var(--primary);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+
+/* ==================================================
+   TABLET
+================================================== */
+
+@media (min-width: 768px) {
+
+  .theme-toggle {
+    width: 76px;
+    height: 36px;
+  }
+
+  .theme-knob {
+    width: 26px;
+    height: 26px;
+  }
+
+  .theme-knob.dark {
+    transform: translateX(40px);
+  }
+}

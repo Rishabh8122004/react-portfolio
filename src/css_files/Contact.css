@@ -1,0 +1,68 @@
+
+/* ==================================================
+   CONTACT PAGE
+   MOBILE-FIRST
+================================================== */
+
+.contact-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+/* ==================================================
+   CONTACT HEADER
+================================================== */
+
+.contact-header {
+  margin-bottom: 36px;
+  text-align: center;
+}
+
+.contact-header p:first-child {
+  margin: 0 0 8px;
+
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.contact-header h1 {
+  margin: 0 0 14px;
+
+  font-size: 2.5rem;
+  line-height: 1.1;
+}
+
+.contact-header p:last-child {
+  max-width: 600px;
+  margin: 0 auto;
+
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ==================================================
+   TABLET
+================================================== */
+
+@media (min-width: 768px) {
+
+  .contact-page {
+    padding: 80px 40px;
+  }
+
+  .contact-header h1 {
+    font-size: 3rem;
+  }
+}
+
+/* ==================================================
+   DESKTOP
+================================================== */
+
+@media (min-width: 1024px) {
+
+  .contact-page {
+    padding: 100px 50px;
+  }
+}

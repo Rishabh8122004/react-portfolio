@@ -1,0 +1,209 @@
+/* ==================================================
+   WEEK 4 PORTFOLIO
+   GLOBAL DESIGN SYSTEM
+================================================== */
+
+:root {
+  /* ---------- Backgrounds ---------- */
+
+  --bg-main: #f5f7fb;
+  --bg-surface: #ffffff;
+  --bg-soft: #eef2ff;
+  --bg-elevated: #ffffff;
+
+  /* ---------- Text ---------- */
+
+  --text-main: #111827;
+  --text-muted: #64748b;
+  --text-soft: #94a3b8;
+  --text-inverse: #ffffff;
+
+  /* ---------- Brand ---------- */
+
+  --primary: #4f46e5;
+  --primary-dark: #3730a3;
+  --accent: #7c3aed;
+  --accent-soft: #ede9fe;
+
+  /* ---------- Borders ---------- */
+
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+
+  /* ---------- Status ---------- */
+
+  --success: #16a34a;
+  --error: #dc2626;
+
+  /* ---------- Shadows ---------- */
+
+  --shadow-sm:
+    0 4px 14px rgba(15, 23, 42, 0.06);
+
+  --shadow-md:
+    0 12px 30px rgba(15, 23, 42, 0.09);
+
+  --shadow-lg:
+    0 24px 60px rgba(15, 23, 42, 0.12);
+
+  /* ---------- Shape ---------- */
+
+  --radius-sm: 0.6rem;
+  --radius-md: 0.9rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 1.6rem;
+  --radius-pill: 999px;
+
+  /* ---------- Layout ---------- */
+
+  --content-width: 1200px;
+  --text-width: 720px;
+
+  /* ---------- Motion ---------- */
+
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+}
+
+
+/* ==================================================
+   DARK MODE
+================================================== */
+
+.dark-mode {
+  --bg-main: #0b1120;
+  --bg-surface: #111827;
+  --bg-soft: #172036;
+  --bg-elevated: #1a2336;
+
+  --text-main: #f8fafc;
+  --text-muted: #a8b3c7;
+  --text-soft: #718096;
+  --text-inverse: #ffffff;
+
+  --primary: #818cf8;
+  --primary-dark: #6366f1;
+  --accent: #a78bfa;
+  --accent-soft: #241f3d;
+
+  --border: #263248;
+  --border-strong: #344158;
+
+  --shadow-sm:
+    0 4px 14px rgba(0, 0, 0, 0.2);
+
+  --shadow-md:
+    0 12px 30px rgba(0, 0, 0, 0.25);
+
+  --shadow-lg:
+    0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+
+/* ==================================================
+   RESET
+================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+
+  background-color: var(--bg-main);
+  color: var(--text-main);
+
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  line-height: 1.5;
+
+  transition:
+    background-color var(--transition-normal),
+    color var(--transition-normal);
+}
+
+
+/* ==================================================
+   BASIC ELEMENTS
+================================================== */
+
+img {
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin-top: 0;
+}
+
+
+/* ==================================================
+   ACCESSIBILITY
+================================================== */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+
+/* ==================================================
+   SELECTION
+================================================== */
+
+::selection {
+  background-color: var(--primary);
+  color: var(--text-inverse);
+}
+
+
+/* ==================================================
+   REDUCED MOTION
+================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

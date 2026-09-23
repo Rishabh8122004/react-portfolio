@@ -1,0 +1,172 @@
+/* ==================================================
+   NAVBAR
+   MOBILE-FIRST
+================================================== */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  min-height: 64px;
+  padding: 12px 20px;
+
+  background-color: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ==================================================
+   MOBILE MENU BUTTON
+================================================== */
+
+.menu-button {
+  display: block;
+
+  width: 42px;
+  height: 42px;
+
+  padding: 0;
+
+  background-color: transparent;
+  color: var(--text-main);
+
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+
+  font-size: 1.4rem;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.menu-button:hover {
+  background-color: var(--bg-soft);
+  color: var(--primary);
+}
+
+.menu-button:active {
+  transform: scale(0.95);
+}
+
+/* ==================================================
+   NAVIGATION LINKS
+================================================== */
+
+.nav-links {
+  display: none;
+
+  position: absolute;
+  top: 100%;
+  left: 0;
+
+  width: 100%;
+
+  flex-direction: column;
+  gap: 4px;
+
+  padding: 12px 20px;
+
+  background-color: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.nav-links.open {
+  display: flex;
+}
+
+.nav-links a {
+  padding: 11px 14px;
+
+  color: var(--text-muted);
+  text-decoration: none;
+
+  font-size: 0.95rem;
+  font-weight: 600;
+
+  border-radius: 0.6rem;
+
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.nav-links a:hover {
+  background-color: var(--bg-soft);
+  color: var(--primary);
+  transform: translateX(3px);
+}
+
+/* ==================================================
+   TABLET
+================================================== */
+
+@media (min-width: 768px) {
+
+  .navbar {
+    justify-content: center;
+
+    min-height: 68px;
+    padding: 14px 30px;
+  }
+
+  .menu-button {
+    display: none;
+  }
+
+  .nav-links {
+    position: static;
+
+    display: flex;
+
+    width: auto;
+
+    flex-direction: row;
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 0;
+
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .nav-links a:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* ==================================================
+   DESKTOP
+================================================== */
+
+@media (min-width: 1024px) {
+
+  .navbar {
+    min-height: 72px;
+    padding: 16px 50px;
+  }
+
+  .nav-links {
+    gap: 10px;
+  }
+
+  .nav-links a {
+    padding: 10px 16px;
+
+    font-size: 1rem;
+  }
+}

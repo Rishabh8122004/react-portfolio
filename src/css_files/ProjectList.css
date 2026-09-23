@@ -1,0 +1,274 @@
+/* ==================================================
+   PROJECT LIST
+   3D CYLINDRICAL PROJECT GALLERY
+================================================== */
+
+.project-gallery {
+  width: 100%;
+  margin-top: 3rem;
+  overflow: hidden;
+}
+
+
+/* ==================================================
+   HEADER
+================================================== */
+
+.project-gallery-header {
+  width: min(100% - 2rem, 1200px);
+  margin: 0 auto 1.5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  color: var(--text-muted, #777);
+
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.project-gallery-header p {
+  margin: 0;
+}
+
+
+/* ==================================================
+   3D STAGE
+================================================== */
+
+.project-gallery-stage {
+  position: relative;
+
+  width: 100%;
+  height: 500px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  perspective: 1200px;
+  perspective-origin: center center;
+
+  overflow: hidden;
+}
+
+
+/* ==================================================
+   CYLINDER
+================================================== */
+
+.project-cylinder {
+  position: relative;
+
+  width: 0;
+  height: 0;
+
+  transform-style: preserve-3d;
+
+  transform:
+    rotateY(var(--cylinder-rotation));
+
+  transition:
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* ==================================================
+   PROJECTS ON CYLINDER
+================================================== */
+
+.project-cylinder-item {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: min(76vw, 380px);
+
+  transform-style: preserve-3d;
+
+  transform:
+    translate(-50%, -50%)
+    rotateY(var(--project-angle-position))
+    translateZ(340px);
+
+  /*
+    Keep the panels visible even when they move
+    around the sides of the cylinder.
+  */
+  backface-visibility: visible;
+}
+
+
+/* ==================================================
+   PROJECT CARD
+================================================== */
+
+.project-cylinder-item .project-card {
+  width: 100%;
+}
+
+
+/* ==================================================
+   DEPTH CONTROL
+================================================== */
+
+/*
+   The cards farther around the cylinder should
+   visually recede instead of fighting the active card.
+*/
+
+.project-cylinder-item:nth-child(n + 3) {
+  opacity: 0.55;
+}
+
+
+/* ==================================================
+   NAVIGATION
+================================================== */
+
+.project-gallery-arrow {
+  position: absolute;
+
+  top: 50%;
+  z-index: 50;
+
+  width: 3rem;
+  height: 3rem;
+
+  display: grid;
+  place-items: center;
+
+  transform: translateY(-50%);
+
+  border: 1px solid var(--border-color, #ddd);
+  border-radius: 50%;
+
+  background: var(--surface-color, #fff);
+  color: var(--text-color, #111);
+
+  font-size: 1.2rem;
+
+  cursor: pointer;
+
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.project-gallery-arrow:hover {
+  transform: translateY(-50%) scale(1.08);
+}
+
+.project-gallery-arrow:active {
+  transform: translateY(-50%) scale(0.94);
+}
+
+.project-gallery-arrow-left {
+  left: 0.6rem;
+}
+
+.project-gallery-arrow-right {
+  right: 0.6rem;
+}
+
+
+/* ==================================================
+   EMPTY STATE
+================================================== */
+
+.no-projects {
+  padding: 3rem 1rem;
+
+  text-align: center;
+
+  color: var(--text-muted, #777);
+}
+
+
+/* ==================================================
+   TABLET
+================================================== */
+
+@media (min-width: 600px) {
+
+  .project-gallery-stage {
+    height: 580px;
+
+    perspective: 1500px;
+  }
+
+  .project-cylinder-item {
+    width: 410px;
+
+    transform:
+      translate(-50%, -50%)
+      rotateY(var(--project-angle-position))
+      translateZ(390px);
+  }
+
+  .project-gallery-arrow-left {
+    left: 1.5rem;
+  }
+
+  .project-gallery-arrow-right {
+    right: 1.5rem;
+  }
+}
+
+
+/* ==================================================
+   DESKTOP
+================================================== */
+
+@media (min-width: 900px) {
+
+  .project-gallery-stage {
+    height: 640px;
+
+    perspective: 1800px;
+  }
+
+  .project-cylinder-item {
+    width: 450px;
+
+    transform:
+      translate(-50%, -50%)
+      rotateY(var(--project-angle-position))
+      translateZ(440px);
+  }
+
+  .project-gallery-arrow {
+    width: 3.5rem;
+    height: 3.5rem;
+
+    font-size: 1.35rem;
+  }
+
+  .project-gallery-arrow-left {
+    left: 2rem;
+  }
+
+  .project-gallery-arrow-right {
+    right: 2rem;
+  }
+}
+
+
+/* ==================================================
+   REDUCED MOTION
+================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .project-cylinder {
+    transition: none;
+  }
+
+  .project-gallery-arrow {
+    transition: none;
+  }
+}

@@ -1,0 +1,135 @@
+/* ==================================================
+   SKILLS SECTION
+   MOBILE-FIRST
+================================================== */
+
+.skills-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+/* ==================================================
+   SKILLS HEADER
+================================================== */
+
+.skills-header {
+  margin-bottom: 36px;
+  text-align: center;
+}
+
+.skills-header p {
+  margin: 0 0 8px;
+
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.skills-header h2 {
+  margin: 0;
+
+  font-size: 2.2rem;
+  line-height: 1.2;
+}
+
+/* ==================================================
+   SKILLS LIST
+================================================== */
+
+.skills-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+/* ==================================================
+   SKILL CARD
+================================================== */
+
+.skill-card {
+  padding: 24px;
+
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+
+  box-shadow: var(--shadow-sm);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.skill-card h3 {
+  margin: 0 0 10px;
+
+  font-size: 1.25rem;
+}
+
+.skill-card > p {
+  margin: 0 0 14px;
+
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.skill-card .skill-category,
+.skill-card .skill-proficiency {
+  margin: 0 0 6px;
+
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.skill-card .skill-proficiency {
+  margin-bottom: 0;
+  color: var(--primary);
+}
+
+/* ==================================================
+   TABLET
+================================================== */
+
+@media (min-width: 768px) {
+
+  .skills-section {
+    padding: 80px 40px;
+  }
+
+  .skills-header h2 {
+    font-size: 2.6rem;
+  }
+
+  .skills-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ==================================================
+   DESKTOP
+================================================== */
+
+@media (min-width: 1024px) {
+
+  .skills-section {
+    padding: 100px 50px;
+  }
+
+  .skills-list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .skill-card {
+    padding: 28px;
+  }
+}

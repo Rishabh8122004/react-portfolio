@@ -1,0 +1,204 @@
+/* ==================================================
+   HERO SECTION
+   MOBILE-FIRST
+================================================== */
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  padding: 60px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ==================================================
+   HERO CONTENT
+================================================== */
+
+.hero-content {
+  text-align: center;
+}
+
+.hero-greeting {
+  margin: 0 0 8px;
+
+  color: var(--primary);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.hero h1 {
+  margin: 0;
+
+  font-size: 2.5rem;
+  line-height: 1.1;
+}
+
+.hero h2 {
+  margin: 14px 0;
+
+  color: var(--text-muted);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.hero-description {
+  max-width: 600px;
+  margin: 0 auto 24px;
+
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ==================================================
+   HERO ACTIONS
+================================================== */
+
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.hero-button {
+  display: inline-block;
+
+  width: 100%;
+  max-width: 220px;
+
+  padding: 12px 20px;
+
+  border-radius: 0.7rem;
+
+  text-decoration: none;
+  text-align: center;
+  font-weight: 700;
+
+  transition:
+    transform 0.25s ease,
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.hero-button:hover {
+  transform: translateY(-2px);
+}
+
+.hero-button.primary {
+  background-color: var(--primary);
+  color: #ffffff;
+}
+
+.hero-button.primary:hover {
+  background-color: var(--primary-dark);
+}
+
+.hero-button.secondary {
+  background-color: var(--bg-surface);
+  color: var(--primary);
+
+  border: 1px solid var(--primary);
+}
+
+.hero-button.secondary:hover {
+  background-color: var(--bg-soft);
+}
+
+/* ==================================================
+   HERO IMAGE
+================================================== */
+
+.hero-image {
+  margin: 0;
+
+  display: flex;
+  justify-content: center;
+}
+
+.hero-image img {
+  width: 220px;
+  height: 220px;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+  border: 5px solid var(--bg-surface);
+
+  box-shadow: var(--shadow-lg);
+}
+
+/* ==================================================
+   TABLET
+================================================== */
+
+@media (min-width: 768px) {
+
+  .hero {
+    flex-direction: row;
+    align-items: center;
+
+    min-height: 600px;
+
+    padding: 80px 40px;
+  }
+
+  .hero-content {
+    flex: 1;
+    text-align: left;
+  }
+
+  .hero-description {
+    margin-left: 0;
+  }
+
+  .hero-actions {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .hero-button {
+    width: auto;
+  }
+
+  .hero-image {
+    flex: 0 0 280px;
+  }
+
+  .hero-image img {
+    width: 280px;
+    height: 280px;
+  }
+}
+
+/* ==================================================
+   DESKTOP
+================================================== */
+
+@media (min-width: 1024px) {
+
+  .hero {
+    gap: 80px;
+
+    padding: 100px 50px;
+  }
+
+  .hero h1 {
+    font-size: 4rem;
+  }
+
+  .hero h2 {
+    font-size: 1.35rem;
+  }
+
+  .hero-image {
+    flex-basis: 340px;
+  }
+
+  .hero-image img {
+    width: 340px;
+    height: 340px;
+  }
+}

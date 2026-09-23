@@ -1,0 +1,99 @@
+/* ==================================================
+   ABOUT PAGE
+   MOBILE-FIRST
+================================================== */
+
+.about-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+/* ==================================================
+   ABOUT HEADER
+================================================== */
+
+.about-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.about-header p {
+  margin: 0 0 8px;
+
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.about-header h1 {
+  margin: 0;
+
+  font-size: 2.5rem;
+  line-height: 1.1;
+}
+
+/* ==================================================
+   ABOUT CONTENT
+================================================== */
+
+.about-content {
+  padding: 28px;
+
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+
+  box-shadow: var(--shadow-sm);
+}
+
+.about-content h2 {
+  margin-top: 0;
+  margin-bottom: 18px;
+
+  font-size: 1.5rem;
+}
+
+.about-content p {
+  margin: 0 0 16px;
+
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+.about-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* ==================================================
+   TABLET
+================================================== */
+
+@media (min-width: 768px) {
+
+  .about-page {
+    padding: 80px 40px;
+  }
+
+  .about-header h1 {
+    font-size: 3rem;
+  }
+
+  .about-content {
+    padding: 40px;
+  }
+}
+
+/* ==================================================
+   DESKTOP
+================================================== */
+
+@media (min-width: 1024px) {
+
+  .about-page {
+    padding: 100px 50px;
+  }
+
+  .about-content {
+    padding: 50px;
+  }
+}

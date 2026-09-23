@@ -1,0 +1,131 @@
+/* ================================================== CONTACT FORM MOBILE-FIRST ================================================== */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 28px;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+} /* ================================================== FORM LABELS ================================================== */
+.contact-form > label {
+  margin-top: 8px;
+  color: var(--text-main);
+  font-weight: 600;
+} /* ================================================== FORM INPUTS ================================================== */
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form input[type="tel"],
+.contact-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+  outline: none;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+.contact-form textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+} /* ================================================== PREFERRED CONTACT METHOD ================================================== */
+.contact-method {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 18px 0 0;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+}
+.contact-method legend {
+  padding: 0 6px;
+  color: var(--text-main);
+  font-weight: 600;
+}
+.contact-method label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+}
+.contact-method input {
+  accent-color: var(--primary);
+} /* ================================================== VALIDATION MESSAGES ================================================== */
+.form-error {
+  color: #dc2626;
+  font-size: 0.85rem;
+}
+.form-success {
+  color: #15803d;
+  font-size: 0.9rem;
+  font-weight: 600;
+} /* ================================================== FORM BUTTONS ================================================== */
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 14px;
+}
+.form-actions button {
+  padding: 12px 20px;
+  border-radius: 0.7rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 0.25s ease,
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+.form-actions button:first-child {
+  background-color: var(--primary);
+  color: #ffffff;
+  border: 1px solid var(--primary);
+}
+.form-actions button:first-child:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+}
+.form-actions button:last-child {
+  background-color: var(--bg-surface);
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+.form-actions button:last-child:hover {
+  background-color: var(--bg-soft);
+  transform: translateY(-2px);
+} /* ================================================== TABLET ================================================== */
+@media (min-width: 768px) {
+  .contact-form {
+    padding: 40px;
+  }
+  .contact-method {
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+  }
+  .contact-method legend {
+    width: 100%;
+    margin-bottom: 4px;
+  }
+  .form-actions {
+    flex-direction: row;
+  }
+  .form-actions button {
+    min-width: 140px;
+  }
+} /* ================================================== DESKTOP ================================================== */
+@media (min-width: 1024px) {
+  .contact-form {
+    padding: 48px;
+  }
+}
