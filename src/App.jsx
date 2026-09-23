@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 
 import Navbar from './jsx_files/Navbar.jsx'
+import Footer from './jsx_files/Footer.jsx'
 import Home from './jsx_files/Home.jsx'
 import About from './jsx_files/About.jsx'
 import Projects from './jsx_files/Projects.jsx'
@@ -23,6 +24,8 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
+
+      <Footer />
     </>
   )
 }

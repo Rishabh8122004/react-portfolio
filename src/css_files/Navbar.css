@@ -170,3 +170,15 @@
     font-size: 1rem;
   }
 }
+/* ==================================================
+   THEME TOGGLE POSITION + ACTIVE LINK
+================================================== */
+
+.navbar .theme-toggle {
+  margin-left: auto;
+}
+
+.nav-links a.active {
+  background-color: var(--bg-soft);
+  color: var(--primary);
+}

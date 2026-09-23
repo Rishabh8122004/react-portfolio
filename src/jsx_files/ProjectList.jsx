@@ -1,40 +1,44 @@
 /* ==================================================
    PROJECT LIST
    WEEK 4 REACT PORTFOLIO
-   CIRCULAR 3D PROJECT GALLERY
+   PROJECT GALLERY (SHALLOW 3D ARC)
 ================================================== */
 
-import { useEffect, useState } from 'react'
+import { useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 import ProjectCard from './ProjectCard.jsx'
 import '../css_files/ProjectList.css'
+
+const SWIPE_DISTANCE = 50
 
 function ProjectList({ projects }) {
   const [activeIndex, setActiveIndex] = useState(0)
 
-  useEffect(() => {
-    setActiveIndex(0)
-  }, [projects.length])
+  /*
+    Refs store values that must survive between renders
+    but should NOT cause a re-render when they change.
+  */
+  const swipeStartX = useRef(null)
+  const swipeHappened = useRef(false)
 
-  if (projects.length === 0) {
-    return (
-      <p className="no-projects">
-        No projects found. Try a different search or category.
-      </p>
+  const totalProjects = projects.length
+  const activeProject = projects[activeIndex]
+
+  const goToNext = () => {
+    setActiveIndex((current) => (current + 1) % totalProjects)
+  }
+
+  const goToPrevious = () => {
+    setActiveIndex(
+      (current) => (current - 1 + totalProjects) % totalProjects
     )
   }
 
-  const totalProjects = projects.length
-
   /*
-    Every project gets a position relative to
-    the currently active project.
+    Position of a project relative to the active one:
 
-    Example with 6 projects:
-
-       -2   -1    0    +1   +2
-             LEFT CENTER RIGHT
+      -2   -1    0    +1   +2
   */
-
   const getCircularPosition = (index) => {
     let position = index - activeIndex
 
@@ -51,94 +55,187 @@ function ProjectList({ projects }) {
     return position
   }
 
-  /*
-    Arrow behaviour:
+  const formatNumber = (number) => String(number).padStart(2, '0')
 
-    → brings the LEFT project to the centre.
-    ← brings the RIGHT project to the centre.
+  /* ---------- Keyboard ---------- */
 
-    This matches the visual direction of the
-    cylindrical movement we want.
-  */
+  const handleKeyDown = (event) => {
+    if (event.key === 'ArrowLeft') {
+      goToPrevious()
+    }
 
-  const moveProject = (direction) => {
-    setActiveIndex((currentIndex) => {
-      let nextIndex = currentIndex - direction
+    if (event.key === 'ArrowRight') {
+      goToNext()
+    }
+  }
 
-      if (nextIndex < 0) {
-        nextIndex = totalProjects - 1
-      }
+  /* ---------- Swipe (touch and mouse) ---------- */
 
-      if (nextIndex >= totalProjects) {
-        nextIndex = 0
-      }
+  const handlePointerDown = (event) => {
+    swipeStartX.current = event.clientX
+    swipeHappened.current = false
+  }
 
-      return nextIndex
-    })
+  const handlePointerUp = (event) => {
+    if (swipeStartX.current === null) {
+      return
+    }
+
+    const distance = event.clientX - swipeStartX.current
+
+    swipeStartX.current = null
+
+    if (Math.abs(distance) < SWIPE_DISTANCE) {
+      return
+    }
+
+    swipeHappened.current = true
+
+    if (distance < 0) {
+      goToNext()
+    } else {
+      goToPrevious()
+    }
+  }
+
+  const handlePointerCancel = () => {
+    swipeStartX.current = null
+  }
+
+  /* ---------- Clicking / focusing a card ---------- */
+
+  const handleItemClick = (event, index, position) => {
+    /* The click at the end of a swipe must not select a card */
+    if (swipeHappened.current) {
+      event.preventDefault()
+      event.stopPropagation()
+      swipeHappened.current = false
+      return
+    }
+
+    /* Clicking a side card brings it to the centre */
+    if (position !== 0) {
+      event.preventDefault()
+      event.stopPropagation()
+      setActiveIndex(index)
+    }
+  }
+
+  /* Tabbing (keyboard) into a side card brings it to the centre */
+  const handleItemFocus = (event, index, position) => {
+    if (position !== 0 && event.target.matches(':focus-visible')) {
+      setActiveIndex(index)
+    }
   }
 
   return (
-    <section className="project-gallery">
+    <section
+      className="project-gallery"
+      aria-label="Project collection"
+      onKeyDown={handleKeyDown}
+    >
 
-      <header className="project-gallery-header">
-        <p>Navigate the collection</p>
+      {/*
+        The focus header does not rotate with the cards.
+        The key makes React rebuild the title whenever the
+        active project changes, which replays the fade-in.
+      */}
+      <header className="project-focus" aria-live="polite">
+        <h2
+          key={activeProject.id}
+          className="project-focus-title"
+        >
+          {activeProject.name}
+        </h2>
 
-        <p>
-          {String(activeIndex + 1).padStart(2, '0')}
-          {' / '}
-          {String(totalProjects).padStart(2, '0')}
-        </p>
+        <Link
+          to={`/project/${activeProject.id}`}
+          className="project-focus-link"
+        >
+          Explore project
+        </Link>
       </header>
 
-      <section
-        className="project-gallery-stage"
-        aria-label="Project collection"
+      <button
+        type="button"
+        className="project-gallery-arrow project-gallery-arrow-left"
+        onClick={goToPrevious}
+        disabled={totalProjects < 2}
+        aria-label="Previous project"
       >
-
-        <button
-          type="button"
-          className="project-gallery-arrow project-gallery-arrow-left"
-          onClick={() => moveProject(-1)}
-          aria-label="Move cylinder left"
+        <svg
+          viewBox="0 0 24 24"
+          width="20"
+          height="20"
+          aria-hidden="true"
+          focusable="false"
         >
-          ←
-        </button>
+          <path
+            d="M15 5l-7 7 7 7"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
 
-        <section className="project-cylinder">
+      <ul
+        className="project-cylinder"
+        onPointerDown={handlePointerDown}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerCancel}
+      >
+        {projects.map((project, index) => {
+          const position = getCircularPosition(index)
 
-          {projects.map((project, index) => {
-            const position = getCircularPosition(index)
+          return (
+            <li
+              key={project.id}
+              className={`project-cylinder-item position-${position}`}
+              style={{ '--project-position': position }}
+              onClickCapture={(event) =>
+                handleItemClick(event, index, position)
+              }
+              onFocusCapture={(event) =>
+                handleItemFocus(event, index, position)
+              }
+            >
+              <ProjectCard project={project} index={index} />
+            </li>
+          )
+        })}
+      </ul>
 
-            return (
-              <article
-                key={project.name}
-                className={`project-cylinder-item position-${position}`}
-                style={{
-                  '--project-position': position,
-                  '--project-index': index,
-                  '--project-count': totalProjects,
-                }}
-              >
-                <ProjectCard
-                  project={project}
-                  index={index}
-                />
-              </article>
-            )
-          })}
-
-        </section>
-
-        <button
-          type="button"
-          className="project-gallery-arrow project-gallery-arrow-right"
-          onClick={() => moveProject(1)}
-          aria-label="Move cylinder right"
+      <button
+        type="button"
+        className="project-gallery-arrow project-gallery-arrow-right"
+        onClick={goToNext}
+        disabled={totalProjects < 2}
+        aria-label="Next project"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          width="20"
+          height="20"
+          aria-hidden="true"
+          focusable="false"
         >
-          →
-        </button>
+          <path
+            d="M9 5l7 7-7 7"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
 
-      </section>
+      <p className="project-gallery-counter">
+        {formatNumber(activeIndex + 1)} / {formatNumber(totalProjects)}
+      </p>
 
     </section>
   )

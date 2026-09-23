@@ -4,7 +4,6 @@
    PROJECT LAB
 ================================================== */
 
-import { Link } from 'react-router-dom'
 import '../css_files/ProjectCard.css'
 
 function ProjectVisual({ project }) {
@@ -248,10 +247,6 @@ function ProjectVisual({ project }) {
 }
 
 function ProjectCard({ project, index }) {
-  const projectId = project.name
-    .toLowerCase()
-    .replace(/\s+/g, '-')
-
   return (
     <article className="project-card">
       <header className="project-card-header">
@@ -267,13 +262,7 @@ function ProjectCard({ project, index }) {
       <ProjectVisual project={project} />
 
       <section className="project-card-content">
-        <header>
-          <small className="project-type">
-            PROJECT / {String(index + 1).padStart(2, '0')}
-          </small>
-
-          <h3>{project.name}</h3>
-        </header>
+        <h3 className="visually-hidden">{project.name}</h3>
 
         <p className="project-description">
           {project.description}
@@ -287,17 +276,6 @@ function ProjectCard({ project, index }) {
           ))}
         </ul>
       </section>
-
-      <footer className="project-card-footer">
-        <Link
-          to={`/project/${projectId}`}
-          className="project-explore"
-          aria-label={`Explore ${project.name}`}
-        >
-          <strong>Explore project</strong>
-          <small>View details</small>
-        </Link>
-      </footer>
     </article>
   )
 }

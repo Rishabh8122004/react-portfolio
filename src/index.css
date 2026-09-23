@@ -53,6 +53,7 @@
   --radius-lg: 1.25rem;
   --radius-xl: 1.6rem;
   --radius-pill: 999px;
+  --radius: var(--radius-md);
 
   /* ---------- Layout ---------- */
 

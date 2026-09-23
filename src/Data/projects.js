@@ -1,6 +1,10 @@
 /* ==================================================
    PROJECT DATA
    WEEK 4 REACT PORTFOLIO
+
+   Optional fields (only add them if they are real):
+   - projectLink
+   - githubLink
 ================================================== */
 
 const projects = [
@@ -11,9 +15,7 @@ const projects = [
       'A simple console-based Tic Tac Toe game implemented in C++. It allows two players to take turns and play the classic game.',
     technologies: ['C++'],
     category: 'Other',
-    image: '',
-    projectLink: '#',
-    githubLink: '',
+    visual: 'tic-tac-toe',
     features: [
       'Two-player gameplay',
       'Turn-based game logic',
@@ -29,9 +31,7 @@ const projects = [
       'A console-based system for converting numbers between binary, octal, decimal, and hexadecimal.',
     technologies: ['C++'],
     category: 'Other',
-    image: '',
-    projectLink: '#',
-    githubLink: '',
+    visual: 'number-conversion',
     features: [
       'Binary conversion',
       'Octal conversion',
@@ -48,9 +48,7 @@ const projects = [
       'A console-based hospital management system for managing patient records, appointments, and medical history. It uses a custom heap / priority queue to track the nearest future appointment.',
     technologies: ['C++', 'DSA'],
     category: 'Other',
-    image: '',
-    projectLink: '#',
-    githubLink: '',
+    visual: 'hospital',
     features: [
       'Patient record management',
       'Appointment management',
@@ -67,9 +65,7 @@ const projects = [
       'A personal portfolio website built from scratch while learning HTML, CSS, and web development fundamentals.',
     technologies: ['HTML', 'CSS'],
     category: 'Web',
-    image: '',
-    projectLink: '#',
-    githubLink: '',
+    visual: 'portfolio',
     features: [
       'Semantic HTML structure',
       'Responsive CSS layouts',
@@ -86,9 +82,8 @@ const projects = [
       'An interactive portfolio developed using JavaScript for dynamic content, DOM manipulation, events, APIs, and local storage.',
     technologies: ['HTML', 'CSS', 'JavaScript'],
     category: 'JavaScript',
-    image: '',
-    projectLink: '#',
-    githubLink: '',
+    visual: 'javascript',
+    githubLink: 'https://github.com/Rishabh8122004/rishabh-portfolio',
     features: [
       'Dynamic project rendering',
       'Dynamic skill rendering',
@@ -108,9 +103,8 @@ const projects = [
       'A collection of data structure and algorithm problems solved while developing problem-solving and competitive programming skills.',
     technologies: ['C++', 'DSA'],
     category: 'Other',
-    image: '',
+    visual: 'dsa',
     projectLink: 'https://leetcode.com/u/Rxhabh_/',
-    githubLink: '',
     features: [
       'Array problems',
       'String problems',
@@ -120,6 +114,25 @@ const projects = [
       'Trees',
       'Dynamic programming',
       'Searching and sorting',
+    ],
+  },
+
+  {
+    id: 'react-portfolio',
+    name: 'React Portfolio',
+    description:
+      'A multi-page React portfolio built with Vite and React Router, with a searchable project section, a live API quote, a validated contact form, and a dark / light theme.',
+    technologies: ['React', 'Vite', 'JavaScript', 'CSS'],
+    category: 'React',
+    visual: 'react',
+    githubLink: 'https://github.com/Rishabh8122004/react-portfolio',
+    features: [
+      'Reusable components built with props',
+      'Project search and category filter',
+      'Dynamic project details route',
+      'API quote with loading, success and error states',
+      'Controlled contact form with validation',
+      'Dark / light theme saved in Local Storage',
     ],
   },
 ]

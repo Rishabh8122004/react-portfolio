@@ -1,376 +1,592 @@
 /* ==================================================
-   PROJECT LIST
-   CIRCULAR PROJECT GALLERY
+   PROJECT CARD
+   MOBILE-FIRST
 ================================================== */
 
-.project-gallery {
-  width: 100%;
-  margin-top: 3rem;
-}
-
-
-/* ==================================================
-   HEADER
-================================================== */
-
-.project-gallery-header {
+.project-card {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 1.25rem;
 
-  margin-bottom: 1.5rem;
-  padding: 0 0.25rem;
+  width: 100%;
+  height: 100%;
+
+  padding: 1.25rem;
+
+  background-color: var(--bg-surface);
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+
+  box-shadow: var(--shadow-md);
 }
 
-.project-gallery-header p {
+.project-card-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.project-number {
+  margin: 0;
+
+  color: var(--primary);
+
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  font-variant-numeric: tabular-nums;
+}
+
+.project-category {
   margin: 0;
 
   color: var(--text-muted);
 
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
 
 /* ==================================================
-   GALLERY STAGE
+   CARD CONTENT
 ================================================== */
 
-.project-gallery-stage {
-  position: relative;
-
-  width: 100%;
-  min-height: 39rem;
-
+.project-card-content {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  gap: 0.75rem;
 
-  overflow: hidden;
+  flex: 1;
+}
 
-  perspective: 1400px;
+.project-card-content h3 {
+  margin: 0;
+
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
+.project-description {
+  margin: 0;
+
+  color: var(--text-muted);
+
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+/* margin-top: auto pushes tags to the bottom,
+   so every card lines up */
+.project-technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  margin: auto 0 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.project-technologies li {
+  padding: 0.25rem 0.65rem;
+
+  color: var(--text-muted);
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+
+  font-size: 0.75rem;
+  font-weight: 600;
 }
 
 
 /* ==================================================
-   CYLINDER
+   EXPLORE PROJECT
 ================================================== */
 
-.project-cylinder {
-  position: relative;
+.project-explore {
+  display: block;
 
-  width: 100%;
-  height: 36rem;
+  padding: 0.9rem 1rem;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-color: var(--primary);
+  color: var(--bg-main);
 
-  transform-style: preserve-3d;
-}
+  border: 1px solid var(--primary);
+  border-radius: var(--radius-md);
 
-
-/* ==================================================
-   CYLINDER ITEMS
-================================================== */
-
-.project-cylinder-item {
-  position: absolute;
-
-  top: 50%;
-  left: 50%;
-
-  width: min(66vw, 25rem);
-
-  transform-style: preserve-3d;
-
-  transform:
-    translate(-50%, -50%)
-    rotateY(calc(var(--project-position) * 28deg))
-    translateZ(31rem);
-
-  transform-origin: center;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
 
   transition:
-    transform 600ms cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 450ms ease,
-    filter 450ms ease;
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
 
-  z-index: calc(
-    100 - abs(var(--project-position))
-  );
+.project-explore:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
 }
 
 
 /* ==================================================
-   ACTIVE / CENTER CARD
+   VISUAL: SHARED
 ================================================== */
 
-.project-cylinder-item.position-0 {
-  z-index: 100;
+.project-visual {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.75rem;
 
-  transform:
-    translate(-50%, -50%)
-    rotateY(0deg)
-    translateZ(31rem);
+  min-height: 11.5rem;
+  margin: 0;
+  padding: 0.85rem;
+
+  background-color: var(--bg-main);
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.visual-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.visual-label small {
+  color: var(--text-muted);
+
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.project-visual figcaption {
+  color: var(--text-muted);
+
+  font-size: 0.75rem;
+  line-height: 1.4;
 }
 
 
 /* ==================================================
-   SIDE CARDS
+   VISUAL: TIC TAC TOE
+   Three X's in a diagonal = the win condition.
 ================================================== */
 
-.project-cylinder-item.position-1 {
-  opacity: 0.88;
+.tic-tac-toe-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
 
-  filter: saturate(0.85);
+  width: 6.5rem;
+  margin: 0 auto;
 
-  z-index: 90;
+  background-color: var(--border-strong);
+
+  border: 1px solid var(--border-strong);
 }
 
-.project-cylinder-item.position--1 {
-  opacity: 0.88;
-
-  filter: saturate(0.85);
-
-  z-index: 90;
-}
-
-
-/* ==================================================
-   FAR CARDS
-================================================== */
-
-.project-cylinder-item.position-2,
-.project-cylinder-item.position--2 {
-  opacity: 0.55;
-
-  filter: saturate(0.65) brightness(0.85);
-
-  z-index: 70;
-}
-
-
-/* ==================================================
-   BACK CARDS
-================================================== */
-
-.project-cylinder-item.position-3,
-.project-cylinder-item.position--3 {
-  opacity: 0.25;
-
-  filter: saturate(0.4) brightness(0.7);
-
-  z-index: 50;
-}
-
-
-/* ==================================================
-   HIDE COMPLETELY BACK POSITION
-================================================== */
-
-.project-cylinder-item.position-3,
-.project-cylinder-item.position--3 {
-  pointer-events: none;
-}
-
-
-/* ==================================================
-   GALLERY ARROWS
-================================================== */
-
-.project-gallery-arrow {
-  position: absolute;
-
-  top: 50%;
-  z-index: 200;
-
+.tic-tac-toe-board strong {
   display: grid;
   place-items: center;
 
-  width: 2.8rem;
-  height: 2.8rem;
+  aspect-ratio: 1;
 
-  padding: 0;
+  background-color: var(--bg-surface);
+  color: var(--primary);
 
-  border: 1px solid var(--border-color);
-  border-radius: 50%;
-
-  background: var(--background-color);
-
-  color: var(--text-color);
-
-  font-size: 1rem;
-
-  cursor: pointer;
-
-  transform: translateY(-50%);
-
-  transition:
-    background-color 180ms ease,
-    border-color 180ms ease,
-    transform 180ms ease;
+  font-size: 1.1rem;
 }
 
-.project-gallery-arrow:hover {
-  border-color: var(--accent-color);
-
-  background: var(--accent-color);
-
-  color: white;
-
-  transform:
-    translateY(-50%)
-    scale(1.06);
+.tic-tac-toe-board strong:nth-child(2),
+.tic-tac-toe-board strong:nth-child(7) {
+  color: var(--accent);
 }
 
-.project-gallery-arrow-left {
-  left: 0.5rem;
+.tic-tac-toe-board strong:nth-child(1),
+.tic-tac-toe-board strong:nth-child(5),
+.tic-tac-toe-board strong:nth-child(9) {
+  background-color: var(--accent-soft);
 }
 
-.project-gallery-arrow-right {
-  right: 0.5rem;
+.tic-tac-toe-visual figcaption {
+  display: flex;
+  flex-direction: column;
+
+  text-align: center;
+}
+
+.tic-tac-toe-visual figcaption strong {
+  color: var(--text-main);
+
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
 }
 
 
 /* ==================================================
-   TABLET
+   VISUAL: NUMBER CONVERSION
 ================================================== */
 
-@media (min-width: 600px) {
-  .project-gallery-stage {
-    min-height: 42rem;
-  }
-
-  .project-cylinder {
-    height: 39rem;
-  }
-
-  .project-cylinder-item {
-    width: min(48vw, 27rem);
-
-    transform:
-      translate(-50%, -50%)
-      rotateY(calc(var(--project-position) * 30deg))
-      translateZ(34rem);
-  }
-
-  .project-cylinder-item.position-0 {
-    transform:
-      translate(-50%, -50%)
-      rotateY(0deg)
-      translateZ(34rem);
-  }
-
-  .project-gallery-arrow-left {
-    left: 1rem;
-  }
-
-  .project-gallery-arrow-right {
-    right: 1rem;
-  }
+.conversion-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
 }
 
+.conversion-flow article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+
+  min-width: 0;
+  padding: 0.5rem 0.4rem;
+
+  background-color: var(--bg-surface);
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.conversion-flow code {
+  color: var(--text-main);
+
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.conversion-flow article small {
+  color: var(--text-muted);
+
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+}
+
+.conversion-flow > strong {
+  color: var(--primary);
+}
+
+
+/* ==================================================
+   VISUAL: HOSPITAL QUEUE
+================================================== */
+
+.hospital-queue {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.queue-item {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  align-items: center;
+  gap: 0.6rem;
+
+  padding: 0.45rem 0.6rem;
+
+  background-color: var(--bg-surface);
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.queue-item small {
+  color: var(--text-muted);
+
+  font-size: 0.65rem;
+  font-weight: 700;
+}
+
+.queue-item strong {
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.queue-item p {
+  margin: 0;
+
+  color: var(--text-muted);
+
+  font-size: 0.7rem;
+  text-align: right;
+}
+
+.queue-item-primary {
+  background-color: var(--accent-soft);
+  border-color: var(--primary);
+}
+
+.queue-item-primary p {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+
+/* ==================================================
+   VISUAL: PERSONAL PORTFOLIO
+================================================== */
+
+.browser-frame {
+  overflow: hidden;
+
+  background-color: var(--bg-surface);
+
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+}
+
+.browser-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+
+  padding: 0.35rem 0.5rem;
+
+  background-color: var(--bg-soft);
+
+  border-bottom: 1px solid var(--border);
+}
+
+.browser-bar small {
+  display: block;
+  flex-shrink: 0;
+
+  width: 0.45rem;
+  height: 0.45rem;
+
+  background-color: var(--border-strong);
+
+  border-radius: 50%;
+}
+
+.browser-bar code {
+  margin-left: 0.4rem;
+
+  color: var(--text-muted);
+
+  font-size: 0.6rem;
+}
+
+.browser-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+
+  padding: 0.7rem;
+}
+
+.browser-content small {
+  color: var(--text-muted);
+
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+}
+
+.browser-content strong {
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+}
+
+.browser-content p {
+  margin: 0;
+
+  color: var(--text-muted);
+
+  font-size: 0.7rem;
+}
+
+.browser-content footer {
+  display: flex;
+  gap: 0.3rem;
+
+  margin-top: 0.3rem;
+}
+
+.browser-content footer small {
+  padding: 0.1rem 0.4rem;
+
+  color: var(--primary);
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+
+  font-weight: 700;
+}
+
+
+/* ==================================================
+   VISUAL: JAVASCRIPT
+================================================== */
+
+.code-environment {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+
+  padding: 0.6rem 0.75rem;
+
+  background-color: var(--bg-surface);
+
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 0.7rem;
+}
+
+.code-environment header {
+  display: flex;
+  justify-content: space-between;
+
+  margin-bottom: 0.35rem;
+  padding-bottom: 0.35rem;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.code-environment header small {
+  color: var(--text-muted);
+
+  font-size: 0.6rem;
+}
+
+.code-environment code {
+  display: block;
+
+  color: var(--text-main);
+
+  white-space: pre;
+}
+
+.code-environment strong {
+  color: var(--accent);
+}
+
+
+/* ==================================================
+   VISUAL: DSA
+================================================== */
+
+.dsa-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.dsa-count {
+  display: flex;
+  flex-direction: column;
+}
+
+.dsa-count strong {
+  color: var(--primary);
+
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.dsa-count small {
+  margin-top: 0.3rem;
+
+  color: var(--text-muted);
+
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+/* column-reverse: the row with one node ends up on top,
+   like the root of a tree */
+.dsa-structure {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.dsa-structure article {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.dsa-structure strong {
+  width: 0.7rem;
+  height: 0.7rem;
+
+  background-color: var(--primary);
+
+  border-radius: 0.2rem;
+
+  opacity: 0.85;
+}
+
+
+/* ==================================================
+   VISUAL: DEFAULT (used until a project gets its own)
+================================================== */
+
+.default-project-visual > strong {
+  align-self: center;
+
+  color: var(--primary);
+
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+}
 
 /* ==================================================
    DESKTOP
 ================================================== */
 
-@media (min-width: 900px) {
-  .project-gallery {
-    margin-top: 4rem;
+@media (min-width: 1024px) {
+
+  .project-card {
+    gap: 1.5rem;
+    padding: 1.5rem;
   }
 
-  .project-gallery-stage {
-    min-height: 44rem;
+  .project-card-content h3 {
+    font-size: 1.4rem;
   }
 
-  .project-cylinder {
-    height: 41rem;
-  }
-
-  .project-cylinder-item {
-    width: min(31vw, 28rem);
-
-    transform:
-      translate(-50%, -50%)
-      rotateY(calc(var(--project-position) * 32deg))
-      translateZ(38rem);
-  }
-
-  .project-cylinder-item.position-0 {
-    transform:
-      translate(-50%, -50%)
-      rotateY(0deg)
-      translateZ(38rem);
-  }
-
-  .project-gallery-arrow {
-    width: 3rem;
-    height: 3rem;
-  }
-
-  .project-gallery-arrow-left {
-    left: 2rem;
-  }
-
-  .project-gallery-arrow-right {
-    right: 2rem;
+  .project-description {
+    font-size: 1rem;
   }
 }
-
-
 /* ==================================================
-   LARGE DESKTOP
+   VISUALLY HIDDEN
+   Read by screen readers, invisible on screen.
+   Used for the project name inside each card
+   (the visible title now lives above the gallery).
 ================================================== */
 
-@media (min-width: 1200px) {
-  .project-gallery-stage {
-    min-height: 46rem;
-  }
+.visually-hidden {
+  position: absolute;
 
-  .project-cylinder {
-    height: 43rem;
-  }
+  width: 1px;
+  height: 1px;
 
-  .project-cylinder-item {
-    width: 25rem;
+  margin: -1px;
+  padding: 0;
 
-    transform:
-      translate(-50%, -50%)
-      rotateY(calc(var(--project-position) * 34deg))
-      translateZ(42rem);
-  }
+  overflow: hidden;
 
-  .project-cylinder-item.position-0 {
-    transform:
-      translate(-50%, -50%)
-      rotateY(0deg)
-      translateZ(42rem);
-  }
+  clip-path: inset(50%);
+  white-space: nowrap;
 
-  .project-gallery-arrow-left {
-    left: 4rem;
-  }
-
-  .project-gallery-arrow-right {
-    right: 4rem;
-  }
-}
-
-
-/* ==================================================
-   REDUCED MOTION
-================================================== */
-
-@media (prefers-reduced-motion: reduce) {
-  .project-cylinder-item {
-    transition: none;
-  }
-
-  .project-gallery-arrow {
-    transition: none;
-  }
+  border: 0;
 }
