@@ -5,6 +5,7 @@
 ================================================== */
 
 import '../css_files/ProjectCard.css'
+import { Link } from 'react-router-dom'
 
 function ProjectVisual({ project }) {
   switch (project.name) {
@@ -246,13 +247,29 @@ function ProjectVisual({ project }) {
   }
 }
 
-function ProjectCard({ project, index }) {
+function ProjectCard({ project, index, isActive }) {
   return (
     <article className="project-card">
       <header className="project-card-header">
         <p className="project-number">
           {String(index + 1).padStart(2, '0')}
         </p>
+
+        {isActive ? (
+          <Link
+            to={`/project/${project.id}`}
+            className="project-explore"
+            aria-label={`Explore ${project.name}`}
+          >
+            Explore
+          </Link>
+        ) : (
+          /* Same size, invisible, not focusable.
+             Keeps the top row identical on every card. */
+          <p className="project-explore project-explore-placeholder">
+            Explore
+          </p>
+        )}
 
         <p className="project-category">
           {project.category}

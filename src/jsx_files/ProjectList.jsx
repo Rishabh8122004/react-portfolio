@@ -4,35 +4,32 @@
    PROJECT GALLERY (SHALLOW 3D ARC)
 ================================================== */
 
-import { useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
-import ProjectCard from './ProjectCard.jsx'
-import '../css_files/ProjectList.css'
+import { useRef, useState } from "react";
+import ProjectCard from "./ProjectCard.jsx";
+import "../css_files/ProjectList.css";
 
-const SWIPE_DISTANCE = 50
+const SWIPE_DISTANCE = 50;
 
 function ProjectList({ projects }) {
-  const [activeIndex, setActiveIndex] = useState(0)
+  const [activeIndex, setActiveIndex] = useState(0);
 
   /*
     Refs store values that must survive between renders
     but should NOT cause a re-render when they change.
   */
-  const swipeStartX = useRef(null)
-  const swipeHappened = useRef(false)
+  const swipeStartX = useRef(null);
+  const swipeHappened = useRef(false);
 
-  const totalProjects = projects.length
-  const activeProject = projects[activeIndex]
+  const totalProjects = projects.length;
+  const activeProject = projects[activeIndex];
 
   const goToNext = () => {
-    setActiveIndex((current) => (current + 1) % totalProjects)
-  }
+    setActiveIndex((current) => (current + 1) % totalProjects);
+  };
 
   const goToPrevious = () => {
-    setActiveIndex(
-      (current) => (current - 1 + totalProjects) % totalProjects
-    )
-  }
+    setActiveIndex((current) => (current - 1 + totalProjects) % totalProjects);
+  };
 
   /*
     Position of a project relative to the active one:
@@ -40,93 +37,93 @@ function ProjectList({ projects }) {
       -2   -1    0    +1   +2
   */
   const getCircularPosition = (index) => {
-    let position = index - activeIndex
+    let position = index - activeIndex;
 
-    const half = totalProjects / 2
+    const half = totalProjects / 2;
 
     if (position > half) {
-      position -= totalProjects
+      position -= totalProjects;
     }
 
     if (position < -half) {
-      position += totalProjects
+      position += totalProjects;
     }
 
-    return position
-  }
+    return position;
+  };
 
-  const formatNumber = (number) => String(number).padStart(2, '0')
+  const formatNumber = (number) => String(number).padStart(2, "0");
 
   /* ---------- Keyboard ---------- */
 
   const handleKeyDown = (event) => {
-    if (event.key === 'ArrowLeft') {
-      goToPrevious()
+    if (event.key === "ArrowLeft") {
+      goToPrevious();
     }
 
-    if (event.key === 'ArrowRight') {
-      goToNext()
+    if (event.key === "ArrowRight") {
+      goToNext();
     }
-  }
+  };
 
   /* ---------- Swipe (touch and mouse) ---------- */
 
   const handlePointerDown = (event) => {
-    swipeStartX.current = event.clientX
-    swipeHappened.current = false
-  }
+    swipeStartX.current = event.clientX;
+    swipeHappened.current = false;
+  };
 
   const handlePointerUp = (event) => {
     if (swipeStartX.current === null) {
-      return
+      return;
     }
 
-    const distance = event.clientX - swipeStartX.current
+    const distance = event.clientX - swipeStartX.current;
 
-    swipeStartX.current = null
+    swipeStartX.current = null;
 
     if (Math.abs(distance) < SWIPE_DISTANCE) {
-      return
+      return;
     }
 
-    swipeHappened.current = true
+    swipeHappened.current = true;
 
     if (distance < 0) {
-      goToNext()
+      goToNext();
     } else {
-      goToPrevious()
+      goToPrevious();
     }
-  }
+  };
 
   const handlePointerCancel = () => {
-    swipeStartX.current = null
-  }
+    swipeStartX.current = null;
+  };
 
   /* ---------- Clicking / focusing a card ---------- */
 
   const handleItemClick = (event, index, position) => {
     /* The click at the end of a swipe must not select a card */
     if (swipeHappened.current) {
-      event.preventDefault()
-      event.stopPropagation()
-      swipeHappened.current = false
-      return
+      event.preventDefault();
+      event.stopPropagation();
+      swipeHappened.current = false;
+      return;
     }
 
     /* Clicking a side card brings it to the centre */
     if (position !== 0) {
-      event.preventDefault()
-      event.stopPropagation()
-      setActiveIndex(index)
+      event.preventDefault();
+      event.stopPropagation();
+      setActiveIndex(index);
     }
-  }
+  };
 
   /* Tabbing (keyboard) into a side card brings it to the centre */
   const handleItemFocus = (event, index, position) => {
-    if (position !== 0 && event.target.matches(':focus-visible')) {
-      setActiveIndex(index)
+    if (position !== 0 && event.target.matches(":focus-visible")) {
+      setActiveIndex(index);
     }
-  }
+  };
 
   return (
     <section
@@ -134,26 +131,15 @@ function ProjectList({ projects }) {
       aria-label="Project collection"
       onKeyDown={handleKeyDown}
     >
-
       {/*
         The focus header does not rotate with the cards.
         The key makes React rebuild the title whenever the
         active project changes, which replays the fade-in.
       */}
       <header className="project-focus" aria-live="polite">
-        <h2
-          key={activeProject.id}
-          className="project-focus-title"
-        >
+        <h2 key={activeProject.id} className="project-focus-title">
           {activeProject.name}
         </h2>
-
-        <Link
-          to={`/project/${activeProject.id}`}
-          className="project-focus-link"
-        >
-          Explore project
-        </Link>
       </header>
 
       <button
@@ -188,13 +174,13 @@ function ProjectList({ projects }) {
         onPointerCancel={handlePointerCancel}
       >
         {projects.map((project, index) => {
-          const position = getCircularPosition(index)
+          const position = getCircularPosition(index);
 
           return (
             <li
               key={project.id}
               className={`project-cylinder-item position-${position}`}
-              style={{ '--project-position': position }}
+              style={{ "--project-position": position }}
               onClickCapture={(event) =>
                 handleItemClick(event, index, position)
               }
@@ -202,9 +188,13 @@ function ProjectList({ projects }) {
                 handleItemFocus(event, index, position)
               }
             >
-              <ProjectCard project={project} index={index} />
+              <ProjectCard
+                project={project}
+                index={index}
+                isActive={position === 0}
+              />
             </li>
-          )
+          );
         })}
       </ul>
 
@@ -236,9 +226,8 @@ function ProjectList({ projects }) {
       <p className="project-gallery-counter">
         {formatNumber(activeIndex + 1)} / {formatNumber(totalProjects)}
       </p>
-
     </section>
-  )
+  );
 }
 
-export default ProjectList
+export default ProjectList;

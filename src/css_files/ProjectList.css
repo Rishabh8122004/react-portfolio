@@ -3,26 +3,35 @@
    SHALLOW 3D ARC
    MOBILE-FIRST
 
-   Phone:   title + button, cards, then arrows + counter
-   Tablet+: title + button, then arrows beside the cards
+   Phone:   title, cards, then arrows + counter
+   Tablet+: title, then arrows beside the cards
 ================================================== */
 
 .project-gallery {
   /* ---- Geometry (tune the arc here) ---- */
-  --card-w: min(76vw, 19rem);
+  --card-w: min(82vw, 19rem);
+  --card-scale: 1; /* how much bigger the centre card is */
   --gap: 0.75rem;
   --delta: 32deg;
   --perspective: 1200px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 
   /*
-    Radius at which neighbouring cards are exactly
-    one --gap apart:
+    The centre card grows by (card-w * (scale - 1) / 2)
+    on each side. We add that to the gap, so the visible
+    space next to the big card is still exactly --gap.
+  */
+  --spread: calc(
+    var(--gap) + var(--card-w) * (var(--card-scale) - 1) / 2
+  );
 
-    radius = (card width + gap) / 2 / tan(delta / 2)
+  /*
+    Radius at which neighbouring cards are one --spread apart:
+
+    radius = (card width + spread) / 2 / tan(delta / 2)
   */
   --ring: calc(
-    (var(--card-w) + var(--gap)) / 2 / tan(calc(var(--delta) / 2))
+    (var(--card-w) + var(--spread)) / 2 / tan(calc(var(--delta) / 2))
   );
 
   display: grid;
@@ -43,70 +52,41 @@
 
 /* ==================================================
    FOCUS HEADER
-   Title + Explore button of the active project.
+   Title of the active project, centred.
    It does not rotate with the cards.
 ================================================== */
 
 .project-focus {
   grid-area: focus;
 
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem 1rem;
-
   padding-inline: var(--page-gutter, 24px);
+
+  text-align: center;
 }
 
 .project-focus-title {
-  flex: 1 1 10rem;
+  /* Reserve two lines on phones so the cards
+     do not jump when a long title wraps */
+  display: grid;
+  place-items: center;
+  min-height: 2.2em;
 
-  margin: 0;
+  margin: 0 auto;
 
-  font-size: 1.25rem;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
+  font-size: clamp(1.5rem, 1.1rem + 2vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
 
   /* Replays every time the key changes = the project changed */
-  animation: focus-title-in 350ms var(--ease);
+  animation: focus-title-in 400ms var(--ease);
 }
 
 @keyframes focus-title-in {
   from {
     opacity: 0;
-    transform: translateY(0.4rem);
-  }
-}
-
-.project-focus-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  min-height: 2.75rem;
-  padding: 0.5rem 1.1rem;
-
-  background-color: var(--primary);
-  color: var(--bg-main);
-
-  border: 1px solid var(--primary);
-  border-radius: var(--radius-md);
-
-  font-size: 0.9rem;
-  font-weight: 700;
-  text-decoration: none;
-
-  transition:
-    transform var(--transition-fast),
-    box-shadow var(--transition-fast);
-}
-
-@media (hover: hover) {
-
-  .project-focus-link:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-sm);
+    transform: translateY(0.5rem);
   }
 }
 
@@ -127,7 +107,7 @@
   align-items: stretch;
 
   margin: 0;
-  padding: 1rem 0 2rem;
+  padding: 1.25rem 0 2rem;
 
   list-style: none;
 
@@ -145,6 +125,9 @@
 ================================================== */
 
 .project-cylinder-item {
+  /* Only the centre card overrides this */
+  --item-scale: 1;
+
   grid-area: 1 / 1;
 
   display: flex;
@@ -159,11 +142,16 @@
     1. pull the whole ring back so the front card is at z = 0
     2. rotate the card round the ring by its position
     3. push the card out to the ring radius
+    4. scale (only the centre card is not 1)
+
+    Every card uses the same list of functions, so the
+    browser can animate between them smoothly.
   */
   transform:
     translateZ(calc(var(--ring) * -1))
     rotateY(calc(var(--project-position) * var(--delta)))
-    translateZ(var(--ring));
+    translateZ(var(--ring))
+    scale(var(--item-scale));
 
   transition:
     transform 600ms var(--ease),
@@ -177,6 +165,8 @@
 
 /* Active project */
 .position-0 {
+  --item-scale: var(--card-scale);
+
   z-index: 3;
 
   opacity: 1;
@@ -309,12 +299,14 @@
 /* ==================================================
    TABLET
    Arrows move beside the cards.
+   Centre card gets a little bigger.
 ================================================== */
 
 @media (min-width: 600px) {
 
   .project-gallery {
     --card-w: 19rem;
+    --card-scale: 1.08;
     --gap: 1.25rem;
     --perspective: 1300px;
 
@@ -327,14 +319,11 @@
     row-gap: 0.5rem;
   }
 
-  .project-focus-title {
-    flex-basis: 16rem;
-
-    font-size: 1.75rem;
-  }
-
-  /* Soft edges: the collection continues beyond the frame */
+  /* Extra room: the centre card is scaled up */
   .project-cylinder {
+    padding: 2.5rem 0 3rem;
+
+    /* Soft edges: the collection continues beyond the frame */
     -webkit-mask-image: linear-gradient(
       to right,
       transparent,
@@ -353,6 +342,14 @@
   }
 }
 
+@media (min-width: 768px) {
+
+  /* Titles fit on one line from here */
+  .project-focus-title {
+    min-height: 0;
+  }
+}
+
 
 /* ==================================================
    DESKTOP
@@ -362,15 +359,12 @@
 
   .project-gallery {
     --card-w: 20rem;
+    --card-scale: 1.12;
     --gap: 1.5rem;
     --delta: 30deg;
     --perspective: 1500px;
 
     margin-top: 5rem;
-  }
-
-  .project-focus-title {
-    font-size: 2rem;
   }
 }
 
@@ -396,8 +390,7 @@
 
   .project-cylinder-item,
   .project-gallery-arrow,
-  .project-gallery-arrow svg,
-  .project-focus-link {
+  .project-gallery-arrow svg {
     transition: none;
   }
 
