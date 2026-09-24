@@ -3,8 +3,9 @@
    WEEK 4 REACT PORTFOLIO
 
    Optional fields (only add them if they are real):
-   - projectLink
+   - projectLink       (+ projectLinkLabel for the button text)
    - githubLink
+   - howItWorks        (short steps, taken from the real code)
 ================================================== */
 
 const projects = [
@@ -16,11 +17,19 @@ const projects = [
     technologies: ['C++'],
     category: 'Other',
     visual: 'tic-tac-toe',
+    // githubLink: 'PASTE_REPO_URL_HERE',
     features: [
       'Two-player gameplay',
       'Turn-based game logic',
       'Win detection',
       'Console-based input handling',
+    ],
+    howItWorks: [
+      'The board is a 3 x 3 grid of characters, numbered 1 to 9, so a player picks a square by typing its number.',
+      'Player 1 chooses X or O, and Player 2 gets the other symbol.',
+      'Players take turns. The chosen square is replaced by the player\u2019s symbol.',
+      'After each move, the program checks every row, column and both diagonals for three matching symbols, and checks for a full board.',
+      'The game ends by announcing the winner or a tie.',
     ],
   },
 
@@ -32,6 +41,7 @@ const projects = [
     technologies: ['C++'],
     category: 'Other',
     visual: 'number-conversion',
+    // githubLink: 'PASTE_REPO_URL_HERE',
     features: [
       'Binary conversion',
       'Octal conversion',
@@ -39,22 +49,38 @@ const projects = [
       'Hexadecimal conversion',
       'Number representation and base conversion',
     ],
+    howItWorks: [
+      'You type the base you are starting from and the base you want, as words: binary, octal, decimal or hexadecimal.',
+      'Binary becomes decimal by adding up the value of each bit, using left shifts.',
+      'Decimal becomes binary, octal or hexadecimal by dividing again and again by the base and collecting the remainders.',
+      'Octal and hexadecimal are first expanded into groups of binary digits, then converted to the target base.',
+      'Binary and decimal act as the bridge between all four systems.',
+    ],
   },
 
   {
     id: 'hospital-management-system',
     name: 'Hospital Management System',
     description:
-      'A console-based hospital management system for managing patient records, appointments, and medical history. It uses a custom heap / priority queue to track the nearest future appointment.',
+      'A console-based hospital management system for managing patients, doctors, and appointments. It uses a custom min-heap (priority queue) to list the nearest appointment first.',
     technologies: ['C++', 'DSA'],
     category: 'Other',
     visual: 'hospital',
+    // githubLink: 'PASTE_REPO_URL_HERE',
     features: [
-      'Patient record management',
-      'Appointment management',
-      'Medical history management',
-      'Custom heap / priority queue',
-      'Appointment prioritization',
+      'Patient records',
+      'Doctor records',
+      'Appointment scheduling',
+      'Custom min-heap / priority queue',
+      'Nearest appointment listed first',
+      'Menu-driven console interface',
+    ],
+    howItWorks: [
+      'Patients and doctors are stored in hash maps, each with an ID that increases automatically.',
+      'Each appointment\u2019s date and time are turned into one number of minutes. That number is its priority.',
+      'Appointments go into a custom min-heap (an array with 1-based indexing) that keeps the earliest one at the top.',
+      'To list appointments, the program copies the heap and removes the top one by one, so the original heap stays intact.',
+      'A numbered menu lets you add patients and doctors, schedule appointments and view everything.',
     ],
   },
 
@@ -66,6 +92,9 @@ const projects = [
     technologies: ['HTML', 'CSS'],
     category: 'Web',
     visual: 'portfolio',
+    githubLink: 'https://github.com/Rishabh8122004/html-css-portfolio',
+    projectLink: 'https://rishabh8122004.github.io/html-css-portfolio/',
+    projectLinkLabel: 'View live site',
     features: [
       'Semantic HTML structure',
       'Responsive CSS layouts',
@@ -84,6 +113,8 @@ const projects = [
     category: 'JavaScript',
     visual: 'javascript',
     githubLink: 'https://github.com/Rishabh8122004/rishabh-portfolio',
+    // projectLink: 'PASTE_LIVE_URL_HERE',
+    // projectLinkLabel: 'View live site',
     features: [
       'Dynamic project rendering',
       'Dynamic skill rendering',
@@ -104,7 +135,9 @@ const projects = [
     technologies: ['C++', 'DSA'],
     category: 'Other',
     visual: 'dsa',
+    githubLink: 'https://github.com/Rishabh8122004/DSA',
     projectLink: 'https://leetcode.com/u/Rxhabh_/',
+    projectLinkLabel: 'View LeetCode profile',
     features: [
       'Array problems',
       'String problems',
@@ -114,6 +147,11 @@ const projects = [
       'Trees',
       'Dynamic programming',
       'Searching and sorting',
+    ],
+    howItWorks: [
+      'Problems are solved in C++ on LeetCode.',
+      'LeetSync automatically sends every accepted submission to the DSA repository on GitHub, which also adds to my GitHub contributions.',
+      'The GitHub repository is the code archive. The LeetCode profile shows the full problem history.',
     ],
   },
 
@@ -126,6 +164,8 @@ const projects = [
     category: 'React',
     visual: 'react',
     githubLink: 'https://github.com/Rishabh8122004/react-portfolio',
+    projectLink: 'https://rishabh8122004.github.io/react-portfolio/',
+    projectLinkLabel: 'View live site',
     features: [
       'Reusable components built with props',
       'Project search and category filter',
@@ -133,6 +173,12 @@ const projects = [
       'API quote with loading, success and error states',
       'Controlled contact form with validation',
       'Dark / light theme saved in Local Storage',
+    ],
+    howItWorks: [
+      'React Router shows each page without a full reload, including the dynamic /project/:id route.',
+      'All projects live in one array of objects. The gallery and this page are both built from it.',
+      'The gallery filters that array using search and category state.',
+      'The theme is saved in Local Storage, and a live quote is fetched from an API with loading, success and error states.',
     ],
   },
 ]

@@ -636,3 +636,52 @@
 
   border: 0;
 }
+/* ==================================================
+   VISUAL: REACT PORTFOLIO
+================================================== */
+
+.component-tree {
+  display: grid;
+  justify-items: center;
+  gap: 0.45rem;
+}
+
+.component-tree > p {
+  margin: 0;
+  padding: 0.25rem 0.8rem;
+
+  background-color: var(--accent-soft);
+  color: var(--primary);
+
+  border: 1px solid var(--primary);
+  border-radius: var(--radius-sm);
+
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.component-tree ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.3rem;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.component-tree li {
+  padding: 0.15rem 0.5rem;
+
+  background-color: var(--bg-surface);
+  color: var(--text-muted);
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+}

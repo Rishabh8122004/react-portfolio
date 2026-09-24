@@ -4,10 +4,10 @@
    PROJECT LAB
 ================================================== */
 
-import '../css_files/ProjectCard.css'
 import { Link } from 'react-router-dom'
+import '../css_files/ProjectCard.css'
 
-function ProjectVisual({ project }) {
+export function ProjectVisual({ project }) {
   switch (project.name) {
     case 'Tic Tac Toe':
       return (
@@ -226,6 +226,36 @@ function ProjectVisual({ project }) {
 
           <figcaption>
             Arrays · Trees · DP · Searching · More
+          </figcaption>
+        </figure>
+      )
+
+    case 'React Portfolio':
+      return (
+        <figure className="project-visual react-visual">
+          <header className="visual-label">
+            <small>07 / COMPONENTS</small>
+            <small>REACT + VITE</small>
+          </header>
+
+          <section className="component-tree" aria-label="Component tree">
+            <p>App</p>
+
+            <ul>
+              <li>Navbar</li>
+              <li>Routes</li>
+              <li>Footer</li>
+            </ul>
+
+            <ul>
+              <li>Home</li>
+              <li>Projects</li>
+              <li>ProjectDetails</li>
+            </ul>
+          </section>
+
+          <figcaption>
+            One array of projects feeds every page.
           </figcaption>
         </figure>
       )
