@@ -141,7 +141,6 @@
   color: var(--primary);
 }
 
-/* Filled = the filter that is currently applied */
 .category-button.active {
   background-color: var(--primary);
   border-color: var(--primary);
@@ -200,18 +199,33 @@
 
 
 /* ==================================================
-   DEVELOPER QUOTE (API)
+   GITHUB ACTIVITY
 ================================================== */
 
-.developer-quote {
-  max-width: 40rem;
+.github-activity {
+  display: grid;
+  gap: 3rem;
+
+  grid-column: 1 / -1;
+
   margin-top: 5rem;
+}
+
+
+/* ==================================================
+   GITHUB SNAPSHOT
+================================================== */
+
+.github-activity .developer-quote {
+  min-width: 0;
+  max-width: 40rem;
+  margin-top: 0;
   padding-top: 2rem;
 
   border-top: 1px solid var(--border);
 }
 
-.developer-quote header p {
+.github-activity .developer-quote header p {
   margin: 0 0 1rem;
 
   color: var(--text-muted);
@@ -222,29 +236,29 @@
   text-transform: uppercase;
 }
 
-.developer-quote > p {
+.github-activity .developer-quote > p {
   margin: 0 0 1.5rem;
 
   color: var(--text-muted);
 }
 
-.developer-quote figure {
+.github-activity .developer-quote figure {
   margin: 0 0 1.5rem;
 }
 
-.developer-quote blockquote {
+.github-activity .developer-quote blockquote {
   margin: 0 0 0.75rem;
 
   font-size: 1.15rem;
   line-height: 1.6;
 }
 
-.developer-quote figcaption {
+.github-activity .developer-quote figcaption {
   color: var(--text-muted);
   font-size: 0.9rem;
 }
 
-.developer-quote button {
+.github-activity .developer-quote button {
   min-height: 2.75rem;
   padding: 0.6rem 1.25rem;
 
@@ -259,13 +273,57 @@
   transition: background-color var(--transition-fast);
 }
 
-.developer-quote button:hover:not(:disabled) {
+.github-activity .developer-quote button:hover:not(:disabled) {
   background-color: var(--bg-soft);
 }
 
-.developer-quote button:disabled {
+.github-activity .developer-quote button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+
+/* ==================================================
+   GITHUB CONTRIBUTION HEATMAP
+================================================== */
+
+.github-heatmap {
+  min-width: 0;
+
+  padding-top: 2rem;
+
+  border-top: 1px solid var(--border);
+}
+
+.github-heatmap > header p {
+  margin: 0 0 1.25rem;
+
+  color: var(--text-muted);
+
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.github-heatmap-frame {
+  width: 100%;
+  min-width: 0;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  padding-bottom: 0.5rem;
+}
+/*
+  The contribution package has its own internal styling.
+  This wrapper keeps it contained inside Project Lab.
+*/
+
+.github-heatmap-frame > * {
+  width: max-content;
+  max-width: none;
+  flex-shrink: 0;
 }
 
 
@@ -289,8 +347,6 @@
 
 /* ==================================================
    DESKTOP
-   Header and filters share the row instead of
-   leaving the right half of the screen empty.
 ================================================== */
 
 @media (min-width: 1024px) {
@@ -316,8 +372,53 @@
   }
 
   .project-gallery,
-  .projects-empty-state,
-  .developer-quote {
+  .projects-empty-state {
     grid-column: 1 / -1;
+  }
+
+
+  /* ----------------------------------------------
+     GitHub snapshot + heatmap
+  ---------------------------------------------- */
+
+  .github-activity {
+    grid-column: 1 / -1;
+
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(0, 1.35fr);
+
+    gap: 4rem;
+
+    align-items: start;
+  }
+
+  .github-activity .developer-quote {
+    /*
+      Override the old page-level grid behavior.
+      The snapshot is now one column inside
+      .github-activity, not the whole page.
+    */
+
+    grid-column: auto;
+    max-width: none;
+  }
+
+  .github-heatmap {
+    min-width: 0;
+    padding-top: 2rem;
+  }
+}
+
+
+/* ==================================================
+   REDUCED MOTION
+================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .category-button,
+  .github-activity .developer-quote button {
+    transition: none;
   }
 }

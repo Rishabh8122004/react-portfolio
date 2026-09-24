@@ -4,6 +4,8 @@
 ================================================== */
 
 import { useEffect, useState } from "react";
+import { GitHubContributionGraph } from "github-contrib-graph/react";
+import "github-contrib-graph/styles.css";
 import projects from "../Data/projects.js";
 import ProjectList from "./ProjectList.jsx";
 import "../css_files/Projects.css";
@@ -14,9 +16,9 @@ function Projects() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  const [quote, setQuote] = useState(null);
-  const [quoteStatus, setQuoteStatus] = useState("loading");
-  const [quoteRequest, setQuoteRequest] = useState(0);
+  const [githubData, setGithubData] = useState(null);
+  const [githubStatus, setGithubStatus] = useState("loading");
+  const [githubRequest, setGithubRequest] = useState(0);
 
   /*
     Runs on the first render, and again every time
@@ -25,32 +27,44 @@ function Projects() {
   useEffect(() => {
     const controller = new AbortController();
 
-    fetch("https://dummyjson.com/quotes/random", {
-      signal: controller.signal,
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to fetch quote");
+    Promise.all([
+      fetch("https://api.github.com/users/Rishabh8122004", {
+        signal: controller.signal,
+      }),
+      fetch(
+        "https://api.github.com/users/Rishabh8122004/repos?sort=updated&direction=desc&per_page=1",
+        {
+          signal: controller.signal,
+        },
+      ),
+    ])
+      .then(([profileResponse, reposResponse]) => {
+        if (!profileResponse.ok || !reposResponse.ok) {
+          throw new Error("Failed to fetch GitHub data");
         }
 
-        return response.json();
+        return Promise.all([profileResponse.json(), reposResponse.json()]);
       })
-      .then((data) => {
-        setQuote(data);
-        setQuoteStatus("success");
+      .then(([profile, repositories]) => {
+        setGithubData({
+          profile,
+          repository: repositories[0] || null,
+        });
+
+        setGithubStatus("success");
       })
       .catch((error) => {
         if (error.name !== "AbortError") {
-          setQuoteStatus("error");
+          setGithubStatus("error");
         }
       });
 
     return () => controller.abort();
-  }, [quoteRequest]);
+  }, [githubRequest]);
 
-  const loadAnotherQuote = () => {
-    setQuoteStatus("loading");
-    setQuoteRequest((current) => current + 1);
+  const refreshGitHubData = () => {
+    setGithubStatus("loading");
+    setGithubRequest((current) => current + 1);
   };
 
   const search = searchTerm.toLowerCase().trim();
@@ -174,34 +188,70 @@ function Projects() {
           DEVELOPER QUOTE
       ================================================== */}
 
-      <section className="developer-quote" aria-live="polite">
-        <header>
-          <p>From the developer</p>
-        </header>
+      <section className="github-activity">
+        {/* ==================================================
+      GITHUB SNAPSHOT
+  ================================================== */}
 
-        {quoteStatus === "loading" && (
-          <p>Finding something worth building...</p>
-        )}
+        <section className="developer-quote" aria-live="polite">
+          <header>
+            <p>GitHub snapshot</p>
+          </header>
 
-        {quoteStatus === "success" && quote && (
-          <figure>
-            <blockquote>&ldquo;{quote.quote}&rdquo;</blockquote>
+          {githubStatus === "loading" && <p>Loading live GitHub data...</p>}
 
-            <figcaption>&mdash; {quote.author}</figcaption>
-          </figure>
-        )}
+          {githubStatus === "success" && githubData && (
+            <figure>
+              <blockquote>
+                Repositories: {githubData.profile.public_repos}
+                <br />
+                Followers: {githubData.profile.followers}
+                <br />
+                Following: {githubData.profile.following}
+                <br />
+                Latest build:{" "}
+                {githubData.repository
+                  ? githubData.repository.name
+                  : "No public repository found"}
+              </blockquote>
 
-        {quoteStatus === "error" && (
-          <p>The quote could not be loaded right now.</p>
-        )}
+              <figcaption>
+                {githubData.repository
+                  ? `★ ${githubData.repository.stargazers_count} · Forks ${githubData.repository.forks_count} · ${githubData.repository.language || "Mixed technologies"}`
+                  : "GitHub profile data loaded"}
+              </figcaption>
+            </figure>
+          )}
 
-        <button
-          type="button"
-          onClick={loadAnotherQuote}
-          disabled={quoteStatus === "loading"}
-        >
-          Another quote
-        </button>
+          {githubStatus === "error" && (
+            <p>GitHub data could not be loaded right now.</p>
+          )}
+
+          <button
+            type="button"
+            onClick={refreshGitHubData}
+            disabled={githubStatus === "loading"}
+          >
+            Refresh GitHub data
+          </button>
+        </section>
+
+        {/* ==================================================
+      CONTRIBUTION HEATMAP
+  ================================================== */}
+
+        <section className="github-heatmap">
+          <header>
+            <p>Contribution activity</p>
+          </header>
+
+          <div className="github-heatmap-frame">
+            <GitHubContributionGraph
+              username="Rishabh8122004"
+              theme="midnight"
+            />
+          </div>
+        </section>
       </section>
     </section>
   );

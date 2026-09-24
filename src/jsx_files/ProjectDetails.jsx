@@ -123,7 +123,7 @@ function ProjectDetails() {
   const nextProject = projects[(projectIndex + 1) % projects.length];
 
   return (
-    <article className="details-page">
+    <article key={project.id} className="details-page">
       <nav aria-label="Breadcrumb">
         <Link to="/projects" className="details-back">
           <BackIcon />
