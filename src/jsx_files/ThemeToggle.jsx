@@ -18,7 +18,7 @@ function ThemeToggle() {
 
   return (
     <button
-      className="theme-toggle"
+      className={`theme-toggle ${darkMode ? 'dark' : 'light'}`}
       type="button"
       onClick={() => setDarkMode(!darkMode)}
       aria-label={
@@ -26,19 +26,19 @@ function ThemeToggle() {
       }
       aria-pressed={darkMode}
     >
-      <span className="theme-icon">☀️</span>
+      <span className="theme-sky" aria-hidden="true">
+        <span className="theme-stars">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
 
-      <span className="theme-track"></span>
+        <span className="theme-sun"></span>
+        <span className="theme-moon"></span>
 
-      <span className="theme-icon">🌙</span>
-
-      <span
-        className={
-          darkMode
-            ? 'theme-knob dark'
-            : 'theme-knob'
-        }
-      ></span>
+        <span className="theme-horizon"></span>
+      </span>
     </button>
   )
 }

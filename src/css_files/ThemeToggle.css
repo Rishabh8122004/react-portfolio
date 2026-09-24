@@ -1,22 +1,21 @@
 /* ==================================================
    THEME TOGGLE
+   MINI SUNSET → MOONRISE
    MOBILE-FIRST
 ================================================== */
 
 .theme-toggle {
   position: relative;
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: block;
 
-  width: 72px;
-  height: 34px;
+  width: 82px;
+  height: 42px;
 
-  padding: 4px 6px;
+  padding: 0;
+  overflow: hidden;
 
-  background-color: var(--bg-soft);
-  color: var(--text-muted);
+  background: var(--bg-soft);
 
   border: 1px solid var(--border);
   border-radius: 999px;
@@ -24,79 +23,314 @@
   cursor: pointer;
 
   transition:
-    background-color 0.25s ease,
-    border-color 0.25s ease;
+    background-color 0.9s ease,
+    border-color 0.5s ease,
+    box-shadow 0.9s ease;
 }
 
-/* ==================================================
-   THEME ICONS
-================================================== */
-
-.theme-icon {
-  position: relative;
-  z-index: 1;
-
-  font-size: 0.85rem;
-  line-height: 1;
-}
 
 /* ==================================================
-   TOGGLE KNOB
+   SKY
 ================================================== */
 
-.theme-knob {
+.theme-sky {
   position: absolute;
-  top: 4px;
-  left: 4px;
+  inset: 0;
 
-  width: 24px;
-  height: 24px;
+  overflow: hidden;
 
-  background-color: var(--bg-surface);
+  border-radius: inherit;
+}
+
+
+/* ==================================================
+   CURVED HORIZON
+================================================== */
+
+.theme-horizon {
+  position: absolute;
+
+  left: -12%;
+  right: -12%;
+  bottom: -22%;
+
+  height: 58%;
+
+  background: #c1ecab;
+
+  border-radius: 50% 50% 0 0 / 18% 18% 0 0;
+
+  z-index: 3;
+
+  transition:
+    background-color 0.9s ease;
+}
+
+
+/* Dark mode ground */
+
+.theme-toggle.dark .theme-horizon {
+  background: #151a2a;
+}
+
+/* ==================================================
+   SUN
+================================================== */
+
+.theme-sun {
+  position: absolute;
+
+  top: 5px;
+  left: 10px;
+
+  width: 32px;
+  height: 32px;
 
   border-radius: 50%;
 
-  box-shadow: var(--shadow-sm);
+  background: #f5b942;
+
+  box-shadow:
+    0 0 6px rgba(245, 185, 66, 0.95),
+    0 0 15px rgba(245, 185, 66, 0.55),
+    0 0 24px rgba(245, 185, 66, 0.25);
+
+  opacity: 1;
 
   transition:
-    transform 0.25s ease,
-    background-color 0.25s ease;
+    transform 1s cubic-bezier(0.65, 0, 0.35, 1),
+    opacity 0.65s ease,
+    box-shadow 0.8s ease;
 }
 
-.theme-knob.dark {
-  transform: translateX(38px);
-}
 
 /* ==================================================
-   HOVER / FOCUS
+   MOON
+================================================== */
+
+.theme-moon {
+  position: absolute;
+
+  top: 44px;
+  right: 10px;
+
+  width: 32px;
+  height: 32px;
+
+  border-radius: 50%;
+
+  background: #eef2f7;
+
+  box-shadow:
+    0 0 6px rgba(238, 242, 247, 0.9),
+    0 0 15px rgba(238, 242, 247, 0.45);
+
+  opacity: 0;
+
+  transform: translateY(0);
+
+  transition:
+    transform 1s cubic-bezier(0.65, 0, 0.35, 1),
+    opacity 0.65s ease,
+    box-shadow 0.8s ease;
+}
+
+
+/* ==================================================
+   STARS
+================================================== */
+
+.theme-stars {
+  position: absolute;
+  inset: 0;
+
+  opacity: 0;
+
+  transition: opacity 0.8s ease;
+}
+
+.theme-stars span {
+  position: absolute;
+
+  width: 2px;
+  height: 2px;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 0 4px rgba(255, 255, 255, 0.9);
+
+  transform: scale(0);
+
+  transition:
+    transform 0.5s ease;
+}
+
+
+/* Star positions */
+
+.theme-stars span:nth-child(1) {
+  top: 7px;
+  left: 18px;
+}
+
+.theme-stars span:nth-child(2) {
+  top: 12px;
+  left: 39px;
+}
+
+.theme-stars span:nth-child(3) {
+  top: 6px;
+  right: 18px;
+}
+
+.theme-stars span:nth-child(4) {
+  top: 17px;
+  right: 30px;
+}
+
+
+/* ==================================================
+   DARK MODE
+   SUNSET → MOONRISE
+================================================== */
+
+.theme-toggle.dark {
+  background: #151a2a;
+
+  border-color: #303852;
+
+  box-shadow:
+    inset 0 0 14px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Sun sets */
+
+.theme-toggle.dark .theme-sun {
+  transform: translate(-9px, 38px) scale(0.9);
+
+  opacity: 0;
+
+  box-shadow: none;
+}
+
+
+/* Moon rises */
+
+.theme-toggle.dark .theme-moon {
+  transform: translateY(-38px);
+
+  opacity: 1;
+
+  box-shadow:
+    0 0 7px rgba(238, 242, 247, 0.95),
+    0 0 16px rgba(238, 242, 247, 0.5);
+}
+
+
+/* Stars appear */
+
+.theme-toggle.dark .theme-stars {
+  opacity: 1;
+}
+
+.theme-toggle.dark .theme-stars span {
+  transform: scale(1);
+}
+
+
+/* Stagger the stars */
+
+.theme-toggle.dark .theme-stars span:nth-child(2) {
+  transition-delay: 0.12s;
+}
+
+.theme-toggle.dark .theme-stars span:nth-child(3) {
+  transition-delay: 0.2s;
+}
+
+.theme-toggle.dark .theme-stars span:nth-child(4) {
+  transition-delay: 0.28s;
+}
+
+
+/* ==================================================
+   HOVER
 ================================================== */
 
 .theme-toggle:hover {
   border-color: var(--primary);
 }
 
+.theme-toggle:hover .theme-sun {
+  box-shadow:
+    0 0 8px rgba(245, 185, 66, 1),
+    0 0 18px rgba(245, 185, 66, 0.6),
+    0 0 28px rgba(245, 185, 66, 0.3);
+}
+
+
+/* ==================================================
+   FOCUS
+================================================== */
+
 .theme-toggle:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 3px;
 }
 
+
 /* ==================================================
-   TABLET
+   REDUCED MOTION
+================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .theme-toggle,
+  .theme-sun,
+  .theme-moon,
+  .theme-stars,
+  .theme-stars span {
+    transition: none;
+  }
+}
+
+
+/* ==================================================
+   TABLET / DESKTOP
 ================================================== */
 
 @media (min-width: 768px) {
 
   .theme-toggle {
-    width: 76px;
-    height: 36px;
+    width: 86px;
+    height: 44px;
   }
 
-  .theme-knob {
-    width: 26px;
-    height: 26px;
+  .theme-sun {
+    width: 34px;
+    height: 34px;
+
+    top: 5px;
+    left: 11px;
   }
 
-  .theme-knob.dark {
-    transform: translateX(40px);
+  .theme-moon {
+    width: 34px;
+    height: 34px;
+
+    top: 46px;
+    right: 11px;
+  }
+
+  .theme-toggle.dark .theme-sun {
+    transform: translate(-10px, 40px) scale(0.9);
+  }
+
+  .theme-toggle.dark .theme-moon {
+    transform: translateY(-40px);
   }
 }
