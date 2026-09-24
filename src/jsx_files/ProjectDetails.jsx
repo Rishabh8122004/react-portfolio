@@ -262,7 +262,46 @@ function ProjectDetails() {
       {/* ---------- Interactive demo (console projects only) ---------- */}
 
       <ProjectDemo key={project.id} visual={project.visual} />
+      
+      {/* ---------- Certificate / proof of work ---------- */}
 
+      {project.certificate && (
+        <section className="details-certificate details-reveal">
+          <div className="certificate-content">
+            <p className="details-eyebrow">Proof of work</p>
+
+            <h2>{project.certificate.title}</h2>
+
+            <p>
+              A certificate documenting the completion of my Data Structures and
+              Algorithms learning journey.
+            </p>
+
+            <a
+              href={project.certificate.image}
+              className="details-button details-button-primary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View Certificate
+              <ExternalIcon />
+            </a>
+          </div>
+
+          <a
+            href={project.certificate.image}
+            className="certificate-preview"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open DSA certificate in a new tab"
+          >
+            <img
+              src={project.certificate.image}
+              alt="Data Structure and Algorithms certificate"
+            />
+          </a>
+        </section>
+      )}
       {/* ---------- Source code (console projects only) ---------- */}
 
       {code && (

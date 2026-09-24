@@ -135,6 +135,10 @@ const projects = [
     githubLink: 'https://github.com/Rishabh8122004/DSA',
     projectLink: 'https://leetcode.com/u/Rxhabh_/',
     projectLinkLabel: 'View LeetCode profile',
+    certificate: {
+  image: `${import.meta.env.BASE_URL}image/Data_Structure_certificate.jpg`,
+  title: 'DSA Certificate',
+},
     features: [
       'Array problems',
       'String problems',
