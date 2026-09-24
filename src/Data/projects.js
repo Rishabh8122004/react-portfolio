@@ -17,7 +17,6 @@ const projects = [
     technologies: ['C++'],
     category: 'Other',
     visual: 'tic-tac-toe',
-    // githubLink: 'PASTE_REPO_URL_HERE',
     features: [
       'Two-player gameplay',
       'Turn-based game logic',
@@ -41,7 +40,6 @@ const projects = [
     technologies: ['C++'],
     category: 'Other',
     visual: 'number-conversion',
-    // githubLink: 'PASTE_REPO_URL_HERE',
     features: [
       'Binary conversion',
       'Octal conversion',
@@ -66,7 +64,6 @@ const projects = [
     technologies: ['C++', 'DSA'],
     category: 'Other',
     visual: 'hospital',
-    // githubLink: 'PASTE_REPO_URL_HERE',
     features: [
       'Patient records',
       'Doctor records',
@@ -113,8 +110,8 @@ const projects = [
     category: 'JavaScript',
     visual: 'javascript',
     githubLink: 'https://github.com/Rishabh8122004/rishabh-portfolio',
-    // projectLink: 'PASTE_LIVE_URL_HERE',
-    // projectLinkLabel: 'View live site',
+    projectLink: 'https://rishabh8122004.github.io/rishabh-portfolio/',
+    projectLinkLabel: 'View live site',
     features: [
       'Dynamic project rendering',
       'Dynamic skill rendering',
@@ -159,7 +156,7 @@ const projects = [
     id: 'react-portfolio',
     name: 'React Portfolio',
     description:
-      'A multi-page React portfolio built with Vite and React Router, with a searchable project section, a live API quote, a validated contact form, and a dark / light theme.',
+      'A multi-page React portfolio built with Vite and React Router, with a searchable project section, a live GitHub API snapshot, a validated contact form, and a dark / light theme.',
     technologies: ['React', 'Vite', 'JavaScript', 'CSS'],
     category: 'React',
     visual: 'react',
@@ -170,7 +167,7 @@ const projects = [
       'Reusable components built with props',
       'Project search and category filter',
       'Dynamic project details route',
-      'API quote with loading, success and error states',
+      'GitHub API integration with loading, success and error states',
       'Controlled contact form with validation',
       'Dark / light theme saved in Local Storage',
     ],
@@ -178,7 +175,7 @@ const projects = [
       'React Router shows each page without a full reload, including the dynamic /project/:id route.',
       'All projects live in one array of objects. The gallery and this page are both built from it.',
       'The gallery filters that array using search and category state.',
-      'The theme is saved in Local Storage, and a live quote is fetched from an API with loading, success and error states.',
+      'The theme is saved in Local Storage, and GitHub data is fetched from the API with loading, success and error states.',
     ],
   },
 ]

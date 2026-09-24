@@ -78,7 +78,7 @@ function ContactForm() {
     }
 
     setErrors({})
-    setSuccess('Your message has been submitted successfully!')
+    setSuccess('Form validated successfully. This demo does not send messages to a backend.')
 
     setFormData({
       name: '',

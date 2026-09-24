@@ -22,7 +22,7 @@ function Projects() {
 
   /*
     Runs on the first render, and again every time
-    quoteRequest changes (the "Another quote" button).
+    githubRequest changes (the "Refresh GitHub data" button).
   */
   useEffect(() => {
     const controller = new AbortController();
@@ -185,7 +185,7 @@ function Projects() {
       )}
 
       {/* ==================================================
-          DEVELOPER QUOTE
+          GITHUB ACTIVITY
       ================================================== */}
 
       <section className="github-activity">
