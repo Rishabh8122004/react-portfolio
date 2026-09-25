@@ -1,12 +1,12 @@
-import { useState } from 'react'
-import { NavLink } from 'react-router-dom'
-import ThemeToggle from './ThemeToggle.jsx'
-import '../css_files/Navbar.css'
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
+import ThemeToggle from "./ThemeToggle.jsx";
+import "../css_files/Navbar.css";
 
 function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const closeMenu = () => setMenuOpen(false)
+  const closeMenu = () => setMenuOpen(false);
 
   return (
     <header className="navbar">
@@ -21,7 +21,7 @@ function Navbar() {
       </button>
 
       <nav
-        className={menuOpen ? 'nav-links open' : 'nav-links'}
+        className={menuOpen ? "nav-links open" : "nav-links"}
         aria-label="Main navigation"
       >
         <NavLink to="/" end onClick={closeMenu}>
@@ -30,6 +30,10 @@ function Navbar() {
 
         <NavLink to="/about" onClick={closeMenu}>
           About
+        </NavLink>
+
+        <NavLink to="/education" onClick={closeMenu}>
+          Education
         </NavLink>
 
         <NavLink to="/projects" onClick={closeMenu}>
@@ -43,7 +47,7 @@ function Navbar() {
 
       <ThemeToggle />
     </header>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;

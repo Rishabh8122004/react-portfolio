@@ -1,0 +1,488 @@
+/* ==================================================
+   EDUCATION PAGE
+================================================== */
+
+.education-page {
+  width: 100%;
+  min-height: 100vh;
+
+  padding: 5rem 1rem 6rem;
+}
+
+
+/* ==================================================
+   CONTAINER
+================================================== */
+
+.education-container {
+  width: min(100%, 1100px);
+  margin: 0 auto;
+}
+
+
+/* ==================================================
+   HEADER
+================================================== */
+
+.education-header {
+  max-width: 700px;
+  margin: 0 auto 3rem;
+
+  text-align: center;
+}
+
+.education-eyebrow {
+  margin: 0 0 0.7rem;
+
+  color: var(--accent);
+
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.education-header h1 {
+  margin: 0 0 1rem;
+
+  color: var(--text);
+
+  font-size: clamp(2.3rem, 8vw, 4rem);
+  line-height: 1.05;
+}
+
+.education-intro {
+  max-width: 600px;
+  margin: 0 auto;
+
+  color: var(--text-muted);
+
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+
+/* ==================================================
+   EDUCATION GRID
+================================================== */
+
+.education-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+
+/* ==================================================
+   EDUCATION CARD
+================================================== */
+
+.education-card {
+  position: relative;
+
+  display: flex;
+  gap: 1rem;
+
+  padding: 1.4rem;
+
+  background-color: var(--bg-surface);
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+
+  box-shadow: var(--shadow-sm);
+
+  overflow: hidden;
+
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.education-card::before {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 3px;
+  height: 100%;
+
+  background: linear-gradient(
+    to bottom,
+    var(--accent),
+    transparent
+  );
+
+  opacity: 0.7;
+}
+
+.education-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow: var(--shadow-md);
+
+  border-color: var(--accent);
+}
+
+
+/* ==================================================
+   CARD NUMBER
+================================================== */
+
+.education-card-number {
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 2.2rem;
+  height: 2.2rem;
+
+  color: var(--accent);
+
+  background-color: var(--accent-soft);
+
+  border: 1px solid var(--border);
+  border-radius: 50%;
+
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+
+/* ==================================================
+   CARD CONTENT
+================================================== */
+
+.education-card-content {
+  min-width: 0;
+  flex: 1;
+}
+
+.education-card-label {
+  margin: 0 0 0.35rem;
+
+  color: var(--accent);
+
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.education-card h2 {
+  margin: 0 0 0.5rem;
+
+  color: var(--text);
+
+  font-size: 1.3rem;
+  line-height: 1.25;
+}
+
+.education-institution {
+  margin: 0 0 0.25rem;
+
+  color: var(--text);
+
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.education-location {
+  margin: 0;
+
+  color: var(--text-muted);
+
+  font-size: 0.82rem;
+}
+
+.education-description {
+  max-width: 650px;
+
+  margin: 1rem 0 0;
+
+  color: var(--text-muted);
+
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+
+/* ==================================================
+   SCHOOL RESULTS
+================================================== */
+
+.education-results {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 0.7rem;
+
+  margin-top: 1.25rem;
+}
+
+.result-item {
+  padding: 0.9rem;
+
+  background-color: var(--bg-main);
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.result-item span {
+  display: block;
+
+  margin-bottom: 0.3rem;
+
+  color: var(--text-muted);
+
+  font-size: 0.72rem;
+}
+
+.result-item strong {
+  color: var(--text);
+
+  font-size: 1.25rem;
+}
+
+
+/* ==================================================
+   DEGREE META
+================================================== */
+
+.degree-meta {
+  display: grid;
+  gap: 0.7rem;
+
+  margin-top: 1.25rem;
+}
+
+.degree-meta span {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+
+  padding: 0.85rem 1rem;
+
+  background-color: var(--bg-main);
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+
+  color: var(--text);
+
+  font-size: 0.85rem;
+}
+
+.degree-meta strong {
+  color: var(--text-muted);
+
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+
+/* ==================================================
+   LINKS
+================================================== */
+
+.education-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  margin-top: 1.25rem;
+  padding: 0.7rem 1rem;
+
+  color: var(--text);
+
+  background-color: var(--bg-main);
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.education-link span {
+  color: var(--accent);
+
+  transition: transform var(--transition-fast);
+}
+
+.education-link:hover {
+  border-color: var(--accent);
+
+  transform: translateY(-2px);
+}
+
+.education-link:hover span {
+  transform: translate(2px, -2px);
+}
+
+
+/* ==================================================
+   CURRENT LEARNING
+================================================== */
+
+.learning-list {
+  display: grid;
+  gap: 1rem;
+
+  margin-top: 1.25rem;
+}
+
+.learning-item {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.learning-dot {
+  flex-shrink: 0;
+
+  width: 8px;
+  height: 8px;
+
+  margin-top: 0.45rem;
+
+  background-color: var(--accent);
+
+  border-radius: 50%;
+
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.learning-item strong {
+  display: block;
+
+  margin-bottom: 0.25rem;
+
+  color: var(--text);
+
+  font-size: 0.88rem;
+}
+
+.learning-item p {
+  margin: 0;
+
+  color: var(--text-muted);
+
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+
+/* ==================================================
+   FOOTER NOTE
+================================================== */
+
+.education-footer-note {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  margin-top: 3rem;
+}
+
+.education-footer-note p {
+  max-width: 600px;
+  margin: 0;
+
+  color: var(--text-muted);
+
+  font-size: 0.78rem;
+  line-height: 1.6;
+
+  text-align: center;
+}
+
+.education-line {
+  flex: 1;
+
+  height: 1px;
+
+  background-color: var(--border);
+}
+
+
+/* ==================================================
+   TABLET / DESKTOP
+================================================== */
+
+@media (min-width: 700px) {
+
+  .education-page {
+    padding: 6rem 2rem 7rem;
+  }
+
+  .education-header {
+    margin-bottom: 4rem;
+  }
+
+  .education-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .degree-card {
+    grid-row: span 2;
+  }
+
+  .degree-meta {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .education-card {
+    padding: 1.7rem;
+  }
+}
+
+
+/* ==================================================
+   LARGE DESKTOP
+================================================== */
+
+@media (min-width: 1000px) {
+
+  .education-grid {
+    gap: 1.75rem;
+  }
+
+  .education-card {
+    padding: 2rem;
+  }
+
+  .education-card h2 {
+    font-size: 1.45rem;
+  }
+}
+
+
+/* ==================================================
+   REDUCED MOTION
+================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .education-card,
+  .education-link,
+  .education-link span {
+    transition: none;
+  }
+
+  .education-card:hover,
+  .education-link:hover {
+    transform: none;
+  }
+}
