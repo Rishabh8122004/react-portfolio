@@ -24,7 +24,8 @@ This project was developed as part of the InternNova Full Stack Web Development 
 * Previous/next project navigation
 * React Router SPA navigation
 * GitHub API integration
-* API loading, success, and error states
+* Internship data integration with an Express REST API
+* API loading, success, error, and retry states
 * GitHub contribution activity graph
 * Controlled contact form
 * Form validation with visible error messages
@@ -43,8 +44,10 @@ This project was developed as part of the InternNova Full Stack Web Development 
 * Vite
 * React Router
 * CSS
+* Express REST API
 * GitHub API
 * GitHub Contribution Graph
+* Local Storage
 
 ## React Concepts Demonstrated
 
@@ -63,7 +66,8 @@ This project demonstrates several core React concepts:
 * Controlled form inputs
 * Form validation
 * API requests with `fetch`
-* Loading and error states
+* Loading, success, error, and empty states
+* Request cancellation with `AbortController`
 * React Router
 * Dynamic route parameters
 * Local Storage
@@ -89,6 +93,57 @@ The project collection is rendered dynamically rather than hard-coded into the P
 
 Search and category filters operate on the same project data.
 
+## Internship API Integration
+
+The `/internships` page demonstrates frontend integration with the Week 5 Express backend.
+
+The page requests internship data from:
+
+```text
+GET /api/internships
+```
+
+The API URL is configured through the Vite environment variable:
+
+```text
+VITE_API_URL
+```
+
+The React application demonstrates:
+
+* `fetch`
+* `useEffect`
+* Loading state
+* Success state
+* Error state
+* Empty-data state
+* Retry functionality
+* `AbortController`
+* CORS-based frontend/backend communication
+
+The internship page currently displays sample/demo internship records from the backend. The application explicitly identifies these records as demo data; the InternNova Full Stack Web Development Internship is the user's actual professional internship experience.
+
+### Local Backend Requirement
+
+For local development, the Express backend must be running because the frontend requests data from the backend API.
+
+Example:
+
+```text
+Frontend: http://localhost:5173
+Backend:  http://localhost:5000
+```
+
+The frontend uses:
+
+```env
+VITE_API_URL=http://localhost:5000
+```
+
+The backend is maintained separately in the `internship-management-api` repository.
+
+The current GitHub Pages deployment is a static frontend deployment and does **not** host the Express backend. Therefore, the live GitHub Pages site cannot retrieve internship API data unless the backend is deployed to a publicly accessible server and `VITE_API_URL` is configured with that public API URL.
+
 ## Routing
 
 The application uses React Router for client-side navigation.
@@ -97,20 +152,24 @@ Available routes:
 
 ```text
 /
- /about
- /projects
- /contact
- /project/:id
- *
+/about
+/education
+/projects
+/internships
+/contact
+/project/:id
+*
 ```
 
 The `/project/:id` route dynamically finds the requested project from the project data and displays its details.
+
+The `/internships` route loads internship data from the Express REST API.
 
 The `*` route displays the custom 404 page for unknown paths.
 
 ## GitHub API Integration
 
-The Projects page uses the GitHub API to retrieve public profile information and the latest public repository information.
+The Projects page uses the GitHub API to retrieve public GitHub profile and repository information.
 
 The API implementation demonstrates:
 
@@ -163,9 +222,11 @@ src/
 │   ├── CodeViewer.jsx
 │   ├── Contact.jsx
 │   ├── ContactForm.jsx
+│   ├── Education.jsx
 │   ├── Footer.jsx
 │   ├── Hero.jsx
 │   ├── Home.jsx
+│   ├── Internships.jsx
 │   ├── Navbar.jsx
 │   ├── NotFound.jsx
 │   ├── ProjectCard.jsx
@@ -202,6 +263,12 @@ Install dependencies:
 npm install
 ```
 
+Create a `.env.local` file in the project root:
+
+```env
+VITE_API_URL=http://localhost:5000
+```
+
 Start the development server:
 
 ```bash
@@ -213,6 +280,8 @@ If PowerShell blocks the npm PowerShell script on Windows, the equivalent comman
 ```bash
 npm.cmd run dev
 ```
+
+The Express backend must also be running locally for the `/internships` page to load API data.
 
 ## Production Build
 
@@ -230,12 +299,16 @@ npm run lint
 
 ## Deployment
 
-The project is deployed as a GitHub Pages site:
+The frontend is deployed as a GitHub Pages site:
 
-https://rishabh8122004.github.io/react-portfolio/
+[https://rishabh8122004.github.io/react-portfolio/](https://rishabh8122004.github.io/react-portfolio/)
+
+GitHub Pages hosts the React frontend only. The Express backend is maintained separately and is currently configured for local development.
 
 ## Project Philosophy
 
 The portfolio is intended to represent the progression from learning web fundamentals to building interactive applications with JavaScript and React.
 
 The projects section includes programming, web development, JavaScript, React, and data-structure work, with individual project pages explaining their implementation and purpose.
+
+The Week 5 work extends the React application by integrating it with a separate Express REST API, demonstrating frontend-backend communication and handling real API request states.
