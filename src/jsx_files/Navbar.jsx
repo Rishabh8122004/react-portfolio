@@ -40,6 +40,10 @@ function Navbar() {
           Projects
         </NavLink>
 
+        <NavLink to="/internships" onClick={closeMenu}>
+          Internships
+        </NavLink>
+
         <NavLink to="/contact" onClick={closeMenu}>
           Contact
         </NavLink>
