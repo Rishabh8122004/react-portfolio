@@ -31,7 +31,33 @@
   font-size: 2.5rem;
   line-height: 1.1;
 }
+/* ==================================================
+   DEMO DATA NOTICE
+================================================== */
 
+.internships-demo-notice {
+  margin: 0 0 32px;
+  padding: 18px 20px;
+
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius);
+
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.internships-demo-notice strong {
+  display: block;
+  margin-bottom: 6px;
+
+  color: var(--text);
+}
+
+.internships-demo-notice p {
+  margin: 0;
+}
 /* ==================================================
    LOADING / ERROR / EMPTY MESSAGES
 ================================================== */
