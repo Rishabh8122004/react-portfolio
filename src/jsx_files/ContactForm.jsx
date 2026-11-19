@@ -1,107 +1,140 @@
-import { useState } from 'react'
-import '../css_files/ContactForm.css'
+import { useState } from "react";
+import "../css_files/ContactForm.css";
 
 function ContactForm() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: '',
-    contactMethod: '',
-  })
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+    contactMethod: "",
+  });
 
-  const [errors, setErrors] = useState({})
-  const [success, setSuccess] = useState('')
+  const [errors, setErrors] = useState({});
+  const [success, setSuccess] = useState("");
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   function handleChange(event) {
-    const { name, value } = event.target
+    const { name, value } = event.target;
 
     setFormData({
       ...formData,
       [name]: value,
-    })
+    });
 
     setErrors({
       ...errors,
-      [name]: '',
-    })
+      [name]: "",
+    });
 
-    setSuccess('')
+    setSuccess("");
   }
 
   function validateForm() {
-    const newErrors = {}
+    const newErrors = {};
 
-    if (formData.name.trim() === '') {
-      newErrors.name = 'Please enter your full name.'
+    if (formData.name.trim() === "") {
+      newErrors.name = "Please enter your full name.";
     }
 
-    if (formData.email.trim() === '') {
-      newErrors.email = 'Please enter your email address.'
+    if (formData.email.trim() === "") {
+      newErrors.email = "Please enter your email address.";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address.'
+      newErrors.email = "Please enter a valid email address.";
     }
 
     if (
-      formData.phone.trim() !== '' &&
+      formData.phone.trim() !== "" &&
       !/^[0-9]{10}$/.test(formData.phone.trim())
     ) {
-      newErrors.phone = 'Please enter a valid 10-digit phone number.'
+      newErrors.phone = "Please enter a valid 10-digit phone number.";
     }
 
-    if (formData.subject.trim() === '') {
-      newErrors.subject = 'Please enter a subject.'
+    if (formData.subject.trim() === "") {
+      newErrors.subject = "Please enter a subject.";
     }
 
-    if (formData.message.trim() === '') {
-      newErrors.message = 'Please enter a message.'
+    if (formData.message.trim() === "") {
+      newErrors.message = "Please enter a message.";
     }
 
-    if (formData.contactMethod === '') {
-      newErrors.contactMethod =
-        'Please select a preferred contact method.'
+    if (formData.contactMethod === "") {
+      newErrors.contactMethod = "Please select a preferred contact method.";
     }
 
-    return newErrors
+    return newErrors;
   }
 
-  function handleSubmit(event) {
-    event.preventDefault()
+  async function handleSubmit(event) {
+    event.preventDefault();
 
-    const validationErrors = validateForm()
+    const validationErrors = validateForm();
 
     if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors)
-      setSuccess('')
-      return
+      setErrors(validationErrors);
+      setSuccess("");
+      return;
     }
 
-    setErrors({})
-    setSuccess('Form validated successfully. This demo does not send messages to a backend.')
+    setErrors({});
+    setIsSubmitting(true);
 
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      subject: '',
-      message: '',
-      contactMethod: '',
-    })
+    try {
+      const formDataToSend = new FormData();
+
+      formDataToSend.append(
+        "access_key",
+        "cae34447-7aef-455b-974b-2bbd1b742db3",
+      );
+      formDataToSend.append("name", formData.name);
+      formDataToSend.append("email", formData.email);
+      formDataToSend.append("phone", formData.phone);
+      formDataToSend.append("subject", formData.subject);
+      formDataToSend.append("message", formData.message);
+      formDataToSend.append("contactMethod", formData.contactMethod);
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formDataToSend,
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSuccess("Your message has been sent successfully!");
+
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: "",
+          contactMethod: "",
+        });
+      } else {
+        setSuccess("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      setSuccess("Unable to send your message. Please check your connection.");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   function handleReset() {
     setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      subject: '',
-      message: '',
-      contactMethod: '',
-    })
+      name: "",
+      email: "",
+      phone: "",
+      subject: "",
+      message: "",
+      contactMethod: "",
+    });
 
-    setErrors({})
-    setSuccess('')
+    setErrors({});
+    setSuccess("");
   }
 
   return (
@@ -116,9 +149,7 @@ function ContactForm() {
         onChange={handleChange}
       />
 
-      {errors.name && (
-        <small className="form-error">{errors.name}</small>
-      )}
+      {errors.name && <small className="form-error">{errors.name}</small>}
 
       <label htmlFor="email">Email:</label>
 
@@ -130,9 +161,7 @@ function ContactForm() {
         onChange={handleChange}
       />
 
-      {errors.email && (
-        <small className="form-error">{errors.email}</small>
-      )}
+      {errors.email && <small className="form-error">{errors.email}</small>}
 
       <label htmlFor="phone">Phone Number:</label>
 
@@ -144,9 +173,7 @@ function ContactForm() {
         onChange={handleChange}
       />
 
-      {errors.phone && (
-        <small className="form-error">{errors.phone}</small>
-      )}
+      {errors.phone && <small className="form-error">{errors.phone}</small>}
 
       <label htmlFor="subject">Subject:</label>
 
@@ -158,9 +185,7 @@ function ContactForm() {
         onChange={handleChange}
       />
 
-      {errors.subject && (
-        <small className="form-error">{errors.subject}</small>
-      )}
+      {errors.subject && <small className="form-error">{errors.subject}</small>}
 
       <label htmlFor="message">Message:</label>
 
@@ -172,9 +197,7 @@ function ContactForm() {
         onChange={handleChange}
       />
 
-      {errors.message && (
-        <small className="form-error">{errors.message}</small>
-      )}
+      {errors.message && <small className="form-error">{errors.message}</small>}
 
       <fieldset className="contact-method">
         <legend>Preferred Contact Method:</legend>
@@ -184,7 +207,7 @@ function ContactForm() {
             type="radio"
             name="contactMethod"
             value="email"
-            checked={formData.contactMethod === 'email'}
+            checked={formData.contactMethod === "email"}
             onChange={handleChange}
           />
           Email
@@ -195,7 +218,7 @@ function ContactForm() {
             type="radio"
             name="contactMethod"
             value="phone"
-            checked={formData.contactMethod === 'phone'}
+            checked={formData.contactMethod === "phone"}
             onChange={handleChange}
           />
           Phone
@@ -203,24 +226,22 @@ function ContactForm() {
       </fieldset>
 
       {errors.contactMethod && (
-        <small className="form-error">
-          {errors.contactMethod}
-        </small>
+        <small className="form-error">{errors.contactMethod}</small>
       )}
 
       <section className="form-actions">
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Sending..." : "Submit"}
+        </button>
 
         <button type="button" onClick={handleReset}>
           Reset
         </button>
       </section>
 
-      {success && (
-        <small className="form-success">{success}</small>
-      )}
+      {success && <small className="form-success">{success}</small>}
     </form>
-  )
+  );
 }
 
-export default ContactForm
+export default ContactForm;
