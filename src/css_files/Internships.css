@@ -1,6 +1,7 @@
+
 /* ==================================================
    INTERNSHIPS PAGE
-   MOBILE-FIRST
+   MATCHING THE EXISTING PORTFOLIO DESIGN SYSTEM
 ================================================== */
 
 .internships-page {
@@ -9,8 +10,9 @@
   padding: 60px 20px;
 }
 
+
 /* ==================================================
-   HEADER
+   PAGE HEADER
 ================================================== */
 
 .internships-header {
@@ -18,11 +20,13 @@
   margin-bottom: 40px;
 }
 
-.internships-header p {
+.internships-header > p {
   margin: 0 0 8px;
 
   color: var(--primary);
   font-weight: 700;
+  letter-spacing: 0.08em;
+  font-size: 0.85rem;
 }
 
 .internships-header h1 {
@@ -31,96 +35,38 @@
   font-size: 2.5rem;
   line-height: 1.1;
 }
-/* ==================================================
-   DEMO DATA NOTICE
-================================================== */
 
-.internships-demo-notice {
-  margin: 0 0 32px;
-  padding: 18px 20px;
-
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-left: 4px solid var(--primary);
-  border-radius: var(--radius);
+.internships-subtitle {
+  margin-top: 12px;
 
   color: var(--text-muted);
-  line-height: 1.6;
+  font-size: 1.05rem;
 }
 
-.internships-demo-notice strong {
-  display: block;
-  margin-bottom: 6px;
 
-  color: var(--text);
-}
-
-.internships-demo-notice p {
-  margin: 0;
-}
 /* ==================================================
-   LOADING / ERROR / EMPTY MESSAGES
+   SHARED EYEBROW TEXT
 ================================================== */
 
-.internships-message {
-  margin: 0;
-  padding: 24px;
+.internship-eyebrow,
+.internship-section-header > p,
+.internship-takeaway > p:first-child {
+  margin: 0 0 10px;
 
-  text-align: center;
-  color: var(--text-muted);
+  color: var(--primary);
 
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-}
-
-.internships-message p {
-  margin: 0;
-}
-
-.internships-error button {
-  margin-top: 16px;
-  padding: 10px 18px;
-
-  color: #fff;
-  font: inherit;
+  font-size: 0.75rem;
   font-weight: 700;
-
-  background-color: var(--primary);
-  border: none;
-  border-radius: var(--radius);
-  cursor: pointer;
+  letter-spacing: 0.12em;
 }
+
 
 /* ==================================================
-   LIST
+   INTERNSHIP OVERVIEW
 ================================================== */
 
-.internships-count {
-  margin: 0 0 16px;
-
-  color: var(--text-muted);
-}
-
-.internships-list {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-
-  margin: 0;
-  padding: 0;
-
-  list-style: none;
-}
-
-/* ==================================================
-   CARD
-================================================== */
-
-.internship-card {
-  height: 100%;
-  padding: 24px;
-  box-sizing: border-box;
+.internship-overview {
+  padding: 28px;
 
   background-color: var(--bg-surface);
   border: 1px solid var(--border);
@@ -129,75 +75,357 @@
   box-shadow: var(--shadow-sm);
 }
 
-.internship-card-header {
+.internship-overview-heading {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 12px;
+  gap: 20px;
 }
 
-.internship-card-header h2 {
+.internship-overview-heading h2 {
   margin: 0;
 
-  font-size: 1.25rem;
+  font-size: 1.5rem;
+  line-height: 1.35;
 }
 
-.internship-status {
-  margin: 0;
+.internship-duration {
+  flex-shrink: 0;
+
+  padding: 7px 13px;
+
+  color: var(--primary);
+  background-color: var(--bg-soft);
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
 
   font-size: 0.85rem;
   font-weight: 700;
 }
 
-.internship-status.is-open {
+.internship-introduction {
+  margin: 22px 0;
+
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+.internship-introduction a {
   color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
 }
 
-.internship-status.is-closed {
+.internship-introduction a:hover {
+  text-decoration: underline;
+}
+
+.internship-overview-details {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+
+  padding-top: 20px;
+
+  border-top: 1px solid var(--border);
+}
+
+.internship-overview-details div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.internship-overview-details span {
   color: var(--text-muted);
+  font-size: 0.85rem;
 }
 
-.internship-meta {
-  margin: 8px 0 12px;
+.internship-overview-details strong {
+  font-size: 0.95rem;
+}
+
+
+/* ==================================================
+   COMMON SECTION
+================================================== */
+
+.internship-section {
+  margin-top: 64px;
+}
+
+.internship-section-header {
+  margin-bottom: 28px;
+}
+
+.internship-section-header h2 {
+  margin: 0 0 8px;
+
+  font-size: 1.8rem;
+  line-height: 1.3;
+}
+
+.internship-section-header > span {
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+
+/* ==================================================
+   SIX-WEEK TIMELINE
+================================================== */
+
+.internship-timeline {
+  display: grid;
+  gap: 18px;
+
+  padding-left: 4px;
+}
+
+.internship-week {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 16px;
+
+  align-items: start;
+}
+
+.internship-week:not(:last-child)::before {
+  content: "";
+
+  position: absolute;
+  top: 42px;
+  bottom: -23px;
+  left: 20px;
+
+  width: 1px;
+
+  background-color: var(--border-strong);
+}
+
+.internship-week-number {
+  position: relative;
+  z-index: 1;
+
+  display: grid;
+  place-items: center;
+
+  width: 42px;
+  height: 42px;
+
+  color: var(--primary);
+  background-color: var(--bg-soft);
+
+  border: 1px solid var(--border);
+  border-radius: 50%;
+
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.internship-week-content {
+  min-width: 0;
+
+  padding: 22px;
+
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+
+  box-shadow: var(--shadow-sm);
+}
+
+.internship-week-label {
+  margin: 0 0 7px;
+
+  color: var(--primary);
+
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.internship-week-content h3 {
+  margin: 0 0 5px;
+
+  font-size: 1.2rem;
+}
+
+.internship-week-content h4 {
+  margin: 0 0 14px;
 
   color: var(--text-muted);
-  font-size: 0.9rem;
+
+  font-size: 0.95rem;
+  font-weight: 500;
 }
 
-.internship-description {
-  margin: 0 0 16px;
+.internship-week-description {
+  margin: 0 0 18px;
+
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+
+/* ==================================================
+   TECHNOLOGY TAGS
+================================================== */
+
+.internship-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.internship-tags span {
+  padding: 5px 11px;
+
+  color: var(--text-muted);
+  background-color: var(--bg-main);
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+
+  font-size: 0.8rem;
+}
+
+
+/* ==================================================
+   PROJECT CARDS
+================================================== */
+
+.internship-projects {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+
+.internship-project-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  min-width: 0;
+  padding: 24px;
+
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+
+  box-shadow: var(--shadow-sm);
+}
+
+.internship-project-number {
+  margin-bottom: 16px;
+
+  color: var(--primary);
+
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.internship-project-card h3 {
+  margin: 0 0 12px;
+
+  font-size: 1.2rem;
+}
+
+.internship-project-card > p {
+  flex: 1;
+
+  margin: 0 0 18px;
 
   color: var(--text-muted);
   line-height: 1.7;
 }
 
-.internship-skills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-
-  margin: 0;
-  padding: 0;
-
-  list-style: none;
-}
-
-.internship-skills li {
-  padding: 4px 12px;
+.internship-project-stack {
+  margin-bottom: 18px;
 
   color: var(--text-muted);
   font-size: 0.85rem;
-
-  border: 1px solid var(--border);
-  border-radius: 999px;
+  line-height: 1.6;
 }
+
+.internship-project-link {
+  color: var(--primary);
+
+  font-size: 0.9rem;
+  font-weight: 700;
+
+  text-decoration: none;
+}
+
+.internship-project-link:hover {
+  text-decoration: underline;
+}
+
+
+/* ==================================================
+   SKILLS OVERVIEW
+================================================== */
+
+.internship-skills {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.internship-skill-group {
+  padding: 22px;
+
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.internship-skill-group h3 {
+  margin: 0 0 16px;
+
+  font-size: 1.05rem;
+}
+
+
+/* ==================================================
+   FINAL TAKEAWAY
+================================================== */
+
+.internship-takeaway {
+  margin-top: 64px;
+  padding: 28px;
+
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius);
+
+  box-shadow: var(--shadow-sm);
+}
+
+.internship-takeaway h2 {
+  margin: 0 0 12px;
+
+  font-size: 1.6rem;
+}
+
+.internship-takeaway > p:last-child {
+  margin: 0;
+
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
 
 /* ==================================================
    TABLET
 ================================================== */
 
 @media (min-width: 768px) {
-
   .internships-page {
     padding: 80px 40px;
   }
@@ -206,18 +434,66 @@
     font-size: 3rem;
   }
 
-  .internships-list {
-    grid-template-columns: repeat(2, 1fr);
+  .internship-overview {
+    padding: 36px;
+  }
+
+  .internship-overview-details {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .internship-week {
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .internship-week-number {
+    width: 48px;
+    height: 48px;
+  }
+
+  .internship-week:not(:last-child)::before {
+    top: 48px;
+    left: 23px;
+  }
+
+  .internship-week-content {
+    padding: 26px;
+  }
+
+  .internship-projects {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .internship-skills {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
 
 /* ==================================================
    DESKTOP
 ================================================== */
 
 @media (min-width: 1024px) {
-
   .internships-page {
     padding: 100px 50px;
+  }
+
+  .internship-projects {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+
+/* ==================================================
+   REDUCED MOTION
+================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .internship-page *,
+  .internships-page * {
+    scroll-behavior: auto;
+    transition: none;
   }
 }
